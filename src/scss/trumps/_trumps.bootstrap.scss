@@ -1,0 +1,92 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.10.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Hacks to negate bugs and other oddities in Bootstrap
+// -----------------------------------------------------------------------------
+
+// Base
+// -----------------------------------------------------------------------------
+
+// *BS4 Alpha6 fix*: Due to a conflict with the new version of normalize.scss,
+// button/inputs need to have their font-family explicitly set.
+// See - https://github.com/twbs/bootstrap/issues/21588
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: $font-family-base;
+}
+
+// Layout
+// -----------------------------------------------------------------------------
+
+// Temp fix for – https://github.com/twbs/bootstrap/issues/21590
+@include media-breakpoint-down(xs) {
+  .container {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+// Nav
+// -----------------------------------------------------------------------------
+
+// For buttons within navs, bootstrap overrides button text color, making text appear faded.
+// This ensures buttons with white text keep stay that way.
+.navbar-nav .nav-link.btn {
+  color: $white;
+
+  &-secondary { color: theme-color("gray-dark"); }
+  &-link { color: $link-color; }
+}
+
+
+// Buttons
+// -----------------------------------------------------------------------------
+
+// Remove any and all default focus/active rings on buttons
+
+button,
+.btn {
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      outline: 0;
+    }
+  }
+}
+
+
+
+
+// Card
+// -----------------------------------------------------------------------------
+
+// *BS4 Alpha fix*: .card-deck not yet setup to work well with BS4's responsive
+// columns (mixins/classes), despite cols being the recommended way to set
+// width on a .card within a .card-deck.
+//
+// This simple-but-hacky fix ensures flex-items within a card-deck column
+// fill the full-height of the column, as is desired.
+
+.card-deck > *[class^="col-"],
+.card-deck > *[class*="__col"] {
+  display: flex;
+}
+
+
+// Tables
+// -----------------------------------------------------------------------------
+
+// Responsive images act weirdly inside table cells on some non-webkit browsers
+// This is a simple fix
+td .img-fluid {
+  width: 100%;
+}

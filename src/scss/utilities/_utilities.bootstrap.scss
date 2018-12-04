@@ -1,0 +1,291 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 07.05.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions of existing Bootstrap Utilities - these should follow the
+// naming convention for the respective BS utility, rather than namespaced BEM.
+// -----------------------------------------------------------------------------
+
+// Typography
+// -----------------------------------------------------------------------------
+
+// Responsive Sizing
+//
+// Bootstrap's text sizing utilties do not include any responsive variations, so
+// we've added a few.
+//
+// .h*-resp        - Scales a heading's font-size down by one heading unit at
+// and below `sm` breakpoint (i.e. `h5` gets `$h6-font-size`). This utility is
+// only available for `h1` through `h5`
+// .lead-md-up      - Apply Boostrap's `.lead` at and above `md` breakpoint.
+// .small-sm-down   - Apply Boostrap's `.small` at and below `sm` breakpoint.
+// .small-md-down   - Apply Boostrap's `.small` at at below `sm` breakpoint.
+// .text-mini   - An even smaller font size for items such as disclaimer text.
+//
+// Styleguide utilities/typography
+
+$h-font-sizes: $h2-font-size, $h3-font-size, $h4-font-size, $h5-font-size, $h6-font-size;
+
+@for $index from 1 through length($h-font-sizes) {
+  @include media-breakpoint-down(sm) {
+    .h#{ $index }-resp {
+      font-size: nth($h-font-sizes, $index);
+    }
+  }
+}
+
+.lead-md-up {
+  @include media-breakpoint-up(md) {
+    font-size: $lead-font-size;
+    font-weight: $lead-font-weight;
+  }
+}
+
+.small-sm-down {
+  @include media-breakpoint-down(sm) {
+    font-size: $small-font-size;
+  }
+}
+
+.small-md-down {
+  @include media-breakpoint-down(md) {
+    font-size: $small-font-size;
+  }
+}
+
+.text-mini {
+  font-size: $mini-font-size;
+}
+
+// Text Color
+//
+// We've added several color utitiltes in addition to the
+// [Bootstrap defaults](http://v4-alpha.getbootstrap.com/components/utilities/#contextual-colors-and-backgrounds).
+//
+// .text-black  - pure black text.
+// .text-muted-inverse  - A variant of `text-muted` for use on dark backgrounds.
+//
+// Styleguide utilities/typography
+@include text-emphasis-variant('.text-muted-inverse', $text-muted--inverse);
+@include text-emphasis-variant('.text-black', $black);
+
+// Text Wrapping
+//
+// These are additions to Bootstrap's `white-space` utilities.
+//
+// .text-wrap  - sets `white-space: normal`
+//
+// Styleguide utilities/typography
+.text-wrap { white-space: normal !important; }
+
+// `position` Utilities
+//
+// Additions to Bootstrap's `position` utilities.
+//
+// .pos-a-cover  - applies `position: absolute;` and sets all side values to 0.
+// .pos-f-sm-up  - applies `position: fixed;` at the `sm` breakpoint and above.
+// .pos-f-md-up  - applies `position: fixed;` at the `md` breakpoint and above.
+// .pos-f-lg-up  - applies `position: fixed;` at the `lg` breakpoint and above.
+//
+// Styleguide utilities/positioning
+
+.pos-a-cover { @extend %pos-a-cover; }
+
+.pos-f-sm-up {
+  @include media-breakpoint-up(sm) {
+    position: fixed !important;
+  }
+}
+
+.pos-f-md-up {
+  @include media-breakpoint-up(md) {
+    position: fixed !important;
+  }
+}
+
+.pos-f-lg-up {
+  @include media-breakpoint-up(lg) {
+    position: fixed !important;
+  }
+}
+
+// Generate responsive spacing utils
+@each $_prop, $_abbrev in (margin: m, padding: p) {
+  @each $_size, $_spacers in $block-spacers {
+    $_spacer-sm-down:   map-get($_spacers, "sm-down");
+    $_spacer-md-up:   map-get($_spacers, "md-up");
+
+    // All sides
+    .#{$_abbrev}-#{$_size} {
+      #{$_prop}: $_spacer-sm-down !important;
+
+      @include media-breakpoint-up(md) {
+        #{$_prop}: $_spacer-md-up !important;
+      }
+    }
+
+    // Specific sides
+    .#{$_abbrev}t-#{$_size} {
+      #{$_prop}-top: $_spacer-sm-down !important;
+      @include media-breakpoint-up(md) { #{$_prop}-top: $_spacer-md-up !important; }
+    }
+
+    .#{$_abbrev}r-#{$_size} {
+      #{$_prop}-right: $_spacer-sm-down !important;
+      @include media-breakpoint-up(md) { #{$_prop}-right: $_spacer-md-up !important; }
+    }
+
+    .#{$_abbrev}b-#{$_size} {
+      #{$_prop}-bottom: $_spacer-sm-down !important;
+      @include media-breakpoint-up(md) { #{$_prop}-bottom: $_spacer-md-up !important; }
+    }
+
+    .#{$_abbrev}l-#{$_size} {
+      #{$_prop}-left: $_spacer-sm-down !important;
+      @include media-breakpoint-up(md) { #{$_prop}-left: $_spacer-md-up !important; }
+    }
+
+    // Axes
+    .#{$_abbrev}x-#{$_size} {
+      #{$_prop}-right: $_spacer-sm-down !important;
+      #{$_prop}-left: $_spacer-sm-down !important;
+
+      @include media-breakpoint-up(md) {
+        #{$_prop}-right: $_spacer-md-up !important;
+        #{$_prop}-left: $_spacer-md-up !important;
+      }
+    }
+
+    .#{$_abbrev}y-#{$_size} {
+      #{$_prop}-top: $_spacer-sm-down !important;
+      #{$_prop}-bottom: $_spacer-sm-down !important;
+
+      @include media-breakpoint-up(md) {
+        #{$_prop}-top: $_spacer-md-up !important;
+        #{$_prop}-bottom: $_spacer-md-up !important;
+      }
+    }
+  }
+}
+
+
+// Responsive spacing negators
+//
+// Adds some more nuanced responsive spacing negators to what's available in bootstrap (all mobile-first).
+//
+// .mt-0-sm-down - `margin-top: 0` at and below `sm` breakpoint.
+// .mr-0-sm-down - `margin-right: 0` at and below `sm` breakpoint.
+// .p*-0-sm-down - `padding-[top, right, bottom, left]: 0` at and below `sm` breakpoint.
+// .py-0-sm-down - `padding-top: 0` and `padding-bottom: 0` at and below `sm` breakpoint.
+// .px-0-md      - `padding-right: 0` and `padding-left: 0` only at `md` breakpoint.
+// This is useful for opening up extra horizontal spacing on tablet-size screens.
+//
+// Styleguide utilities/spacing
+
+.mt-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    margin-top: 0 !important;
+  }
+}
+
+.mr-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    margin-right: 0 !important;
+  }
+}
+
+.pt-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-top: 0 !important;
+  }
+}
+
+.pr-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-right: 0 !important;
+  }
+}
+
+.pl-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-left: 0 !important;
+  }
+}
+
+.pb-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 0 !important;
+  }
+}
+
+.py-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.px-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+.px-0-md {
+  @include media-breakpoint-only(md) {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+// Borders
+//
+// Additions to Bootstrap's border utilities.
+//
+// .border-0-sm-down - Removes all existing borders at and below the `sm`
+// breakpoint.
+// .border-0-md-down - Removes all existing borders at and below the `md`
+// breakpoint.
+// .border-0-xxs-down - Removes all existing borders at and below the custom `xxs`
+// breakpoint.
+//
+// Styleguide utilities/misc
+
+.border-0-xxs-down {
+  @media (max-width: $breakpoint-xxs) {
+    border: 0 !important;
+  }
+}
+
+.border-0-sm-down {
+  @include media-breakpoint-down(sm) {
+    border: 0 !important;
+  }
+}
+
+.border-0-md-down {
+  @include media-breakpoint-down(md) {
+    border: 0 !important;
+  }
+}
+
+// Background Colors
+//
+// Additions to Bootstrap's background-color utilities.
+//
+// .bg-white - standard white background-color.
+// .bg-trans-white - semi-transparent white background-color.
+// .bg-trans-blue - semi-transparent blue background-color.
+// .bg-charcoal - charcoal (dark gray) background-color.
+//
+// Styleguide utilities/misc
+
+@include bg-variant('.bg-white', $white);
+@include bg-variant('.bg-trans-white', rgba($white, 0.9));
+@include bg-variant('.bg-trans-blue', rgba($brinks-blue-trans, 0.9));
+@include bg-variant('.bg-trans-black', $black-trans);
+@include bg-variant('.bg-charcoal', theme-color("dark"));

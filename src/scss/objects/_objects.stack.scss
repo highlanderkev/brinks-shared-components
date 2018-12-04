@@ -1,0 +1,40 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 09.22.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// WIP: Use to wrap an stacked items that you want to have consistent,
+// responsive vertical spacing between them.
+// -----------------------------------------------------------------------------
+
+.o-stack__item + .o-stack__item {
+  .o-stack & {
+    margin-top: $block-spacer-mid-sm-down;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: $block-spacer-lil-md-up;
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: $block-spacer-mid-md-up;
+    }
+  }
+
+  .o-stack--md-down & {
+    @include media-breakpoint-down(sm) {
+      margin-top: $block-spacer-mid-sm-down;
+    }
+
+    @include media-breakpoint-only(md) {
+      margin-top: $block-spacer-lil-md-up;
+    }
+  }
+
+  .o-stack--sm-down & {
+    @include media-breakpoint-down(sm) {
+      margin-top: $block-spacer-mid-sm-down;
+    }
+  }
+}

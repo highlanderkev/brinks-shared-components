@@ -1,0 +1,190 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+//
+// Use this files for GLOBAL, custom SASS variables – those not part of Boostrap
+// that are used in multiple scss files.
+// If a var is only needed by one file, declare it at the top of that file.
+//
+// Please use BEM + ITCSS for naming variables when possible:
+//
+// ${itcss-prefix}-{block-name}--{modifier-name}
+// ${itcss-prefix}-{block-name}__{element-name}
+// ${itcss-prefix}-{block-name}__{element-name}--{modifier-name}
+// ${itcss-prefix}-{block-name}__{element-name}--{modifier-name}-{modifier-value}
+//
+// itcss-prefix - an ITCSS prefix to identify the role of the variable.
+// block-name — a block name. The field is required because only a block exists as an independent BEM entity
+// element-name — an element name
+// modifier-name — a modifier name
+// modifier_value — a modifier value
+//
+// -> ITCSS Prefixes: http://csswizardry.com/2015/03/more-transparent-ui-code-with-namespaces/
+// -> BEM Naming conventions: https://en.bem.info/method/naming-convention/
+// =============================================================================
+
+
+// Elements
+// =============================================================================
+
+ // Spacing
+ // The gutter width is the base for spacing.
+ // Usually a spacer will be used to set margins and paddings.
+ // To have more control, we use our own additional variables
+ // -> Bootstrap already has the variable "$spacer", equivalent to map-get($spacers, 3)
+$spacer-1: map-get($spacers, 1);
+$spacer-2: map-get($spacers, 2);
+ // Use bootstrap's "$spacer" as equivalent to map-get($spacers, 3)
+$spacer-4: map-get($spacers, 4);
+$spacer-5: map-get($spacers, 5);
+$spacer-6: map-get($spacers, 6);
+
+// Standard vertical spacers for separating block elements
+$block-spacer-lil-sm-down: $spacer;
+$block-spacer-lil-md-up: $spacer-4;
+
+$block-spacer-mid-sm-down: $spacer-4;
+$block-spacer-mid-md-up: $spacer-5;
+
+$block-spacer-big-sm-down: $spacer-5;
+$block-spacer-big-md-up: $spacer-6;
+
+$block-spacers: (
+  "lil": (
+    "sm-down": $block-spacer-lil-sm-down,
+    "md-up": $block-spacer-lil-md-up
+  ),
+  "mid": (
+    "sm-down": $block-spacer-mid-sm-down,
+    "md-up": $block-spacer-mid-md-up
+  ),
+  "big": (
+    "sm-down": $block-spacer-big-sm-down,
+    "md-up": $block-spacer-big-md-up
+  )
+);
+
+// icon sizes
+$icon-sizes: (
+  1:  0.5em,
+  2:  1rem,
+  3:  1.5rem,
+  4:  2rem,
+  5:  2.5rem,
+  6:  3rem,
+  7:  4rem,
+  8:  5rem,
+  9:  6rem,
+  10: 7rem
+);
+
+
+// Border/frame widths
+// For stylized borders and frames as seen in
+// the Brinks HS brand guide
+$bhs-frame-width: 1rem;
+$bhs-frame-border: $bhs-frame-width solid $white;
+
+
+// 2.1 Typography
+// =============================================================================
+
+// Additional Line heights
+$line-height--compact: 1.25;
+$heading-large-line-height: $line-height--compact;
+
+// Headings margin for small headings on xtra small screens
+$heading--small-margin-bottom-xs-down: $spacer-2;
+
+// Settings for all-caps text
+$u-text--caps-letter-spacing: 0.025em;
+$u-text--caps-font-weight: $font-weight-extra-bold; // Regular weight text not brand-compliant
+
+// Additional Font Sizes
+
+$h1-font-size-md: 3.333rem; // 60px
+$h2-font-size-md: 1.666rem; // 30px
+
+$mini-font-size: px-to-rem(12);
+
+// -> Smaller main heading size used within certain components (clickable frame, price)
+$component-alternate-h1-font-size: 2.5rem; // 45px
+
+// -> All-caps text appears larger to the naked eye than standard-case text
+// -> at a given font-size. Correct this discrepancy with a size-ratio.
+$u-text--caps-size-ratio: 0.91;
+$u-text--caps-font-size: #{$u-text--caps-size-ratio}rem;
+
+$h3-font-size--caps:  $h3-font-size * $u-text--caps-size-ratio;
+$h4-font-size--caps:  $h4-font-size * $u-text--caps-size-ratio;
+$h5-font-size--caps:  $h5-font-size * $u-text--caps-size-ratio;
+$h6-font-size--caps:  $h6-font-size * $u-text--caps-size-ratio;
+$font-size-sm--caps:  $font-size-sm * $u-text--caps-size-ratio;
+
+// Text-shadow
+$text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
+// Bootstrap extension
+$text-muted--inverse: rgba($white, 0.65);
+
+// Icon settings and helper vars
+$icon-font-family: "icomoon" !important;
+
+// 3. Objects -> Cosmetic-free design patterns
+// =============================================================================
+
+// 3.1. Layout & Grid
+// -----------------------------------------------------------------------------
+
+// Bootstrap extensions
+
+// .container fills the full screen width all the way up to
+// size XL. Responsive gutter sizes allow a comfortable
+// outer gutter width at each size.
+$container-gutter-widths: (
+	// Extra small screen, Phones
+	xs: $grid-gutter-width * 2,
+	// Small screen, Phones
+	sm: $grid-gutter-width * 2,
+	// Medium screen, Tablets
+	md: $grid-gutter-width * 2,
+	// Large screen, Desktops
+	lg: $grid-gutter-width * 2,
+	// Extra large screen, wide Desktops
+	xl: $grid-gutter-width
+);
+
+// Breakpoints to target super small phones (i.e. iphone 5)
+$breakpoint-xxs: 360px;
+
+
+// 4. Components -> Designed components, chunks of UI.
+// =============================================================================
+
+// Approximate navbar heights
+$navbar-height-xs: 52px;
+$navbar-height-md: 80px;
+$navbar-height-lg: 85px;
+
+// Navbar Logo sizes, used in both navbar and nav scss files.
+$navbar-brand-logo-height-xs: 28px;
+$navbar-brand-logo-height-sm: 30px;
+$navbar-brand-logo-height-lg: 37px;
+
+// Navbar inverse color - needed in dropdown and navbar files
+$navbar-dark-bg-color: theme-color("primary");
+
+// Drop shadows
+// -> Standard box shadow for header that fixed to top of page
+$box-shadow-fixed-header: 0 2px 6px 0 rgba(0, 0, 0, 0.08);
+
+// 5.0. Utilities
+// =============================================================================
+// -> components/_components.utilities.scss
+
+// Border utilities
+$u-border: 1px solid $border-color;

@@ -1,0 +1,21 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// -----------------------------------------------------------------------------
+// Overrides of vendor styles
+// -----------------------------------------------------------------------------
+
+// Wistia video popover
+.fancybox-wrap.wistia-fancybox-wrap.fancybox-opened {
+  z-index: $zindex-modal;
+}
+
+// scss-lint:disable ImportantRule, IdSelector
+.wistia-fancybox #fancybox-overlay {
+  z-index: $zindex-modal-backdrop !important;
+}
+// scss-lint:enable ImportantRule, IdSelector
+
+.hs_cos_wrapper_type_rich_text ul {
+  @extend .list-bulleted;
+}

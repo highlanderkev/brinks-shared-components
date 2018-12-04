@@ -1,0 +1,25 @@
+// =============================================================================
+//          (c) Copyright 2016 by LiveWatch Security LLC | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 09.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap's Form Component
+// See: http://getbootstrap.com/docs/4.1/components/forms/
+// -----------------------------------------------------------------------------
+
+.form-group {
+  // Reset bottom marging on last form-group
+  &:last-child { margin-bottom: 0; }
+
+  small,
+  .small {
+    line-height: $input-btn-line-height;
+  }
+}
+
+// Remove bold font-weight from inputs
+.form-control {
+  font-weight: $font-weight-normal;
+}

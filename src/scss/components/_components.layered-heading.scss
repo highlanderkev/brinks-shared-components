@@ -1,0 +1,35 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 8.2.18
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Stylized dual-layer heading, common in Brinks Home design language.
+// -----------------------------------------------------------------------------
+
+$c-layered-heading-small-ln-1-font-size: 1.5rem;
+$c-layered-heading-small-ln-2-font-size: $component-alternate-h1-font-size;
+
+.c-layered-heading {
+  display: flex;
+  flex-direction: column;
+
+  &__top {
+    @extend .h2;
+    margin-bottom: 0;
+  }
+}
+
+// TODO: add documentation
+.c-layered-heading--small {
+  @include media-breakpoint-up(md) {
+    .c-layered-heading__top {
+      font-size: $c-layered-heading-small-ln-1-font-size;
+    }
+
+    .c-layered-heading__bottom {
+      font-size: $c-layered-heading-small-ln-2-font-size;
+    }
+  }
+}

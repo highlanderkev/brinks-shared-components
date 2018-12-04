@@ -1,0 +1,75 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 07.25.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Components supporting multimedia – videos, images, gifs, etc.
+// -----------------------------------------------------------------------------
+
+$c-media-bg-h-fixed-sm-down: 180px;
+$c-media-bg-h-fixed-md: 432px;
+$c-media-bg-h-fixed-lg-up: 500px;
+$c-media-bg-overlay-screen-color: $black-trans;
+$c-media-bg-overlay-screen-color-darker: $black-trans-dark;
+
+.c-media-bg {
+  position: relative;
+  overflow-y: hidden;
+  // Support background-image for object, in additional to __object element
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  // Ensure top/bottom frame sides are part of document flow,
+  // white left/right sides are not (uses box-shadow as solution)
+  border-top: $bhs-frame-border;
+  border-bottom: $bhs-frame-border;
+  box-shadow: inset $bhs-frame-width 0 0 0 #fff,
+              inset (-$bhs-frame-width) 0 0 0 #fff;
+
+  // When stacking `media-bg`s, ensure that frame height does not
+  // double up.
+  & + & {
+    border-top: 0;
+  }
+
+  // Ensure content is z-indexed abover overlay/screen
+  &--overlayed-l,
+  &--screened {
+    > * {
+      position: relative;
+      z-index: $zindex-background-overlay-content;
+    }
+  }
+
+  &--overlayed-l::before,
+  &--screened::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: $bhs-frame-width; // ensure overlay does not overlap frame
+    height: 100%;
+    content: "";
+  }
+
+  &--overlayed-l::before {
+    width: calc(100% - #{2 * $bhs-frame-width});
+    background-color: $brinks-blue-trans;
+
+    @include media-breakpoint-up(md) {
+      width: calc(50% - #{$bhs-frame-width});
+    }
+  }
+
+  &--screened::before {
+    right: 0;
+    width: calc(100% - #{2 * $bhs-frame-width});
+    background-color: $c-media-bg-overlay-screen-color-darker;
+
+    @include media-breakpoint-up(md) {
+      background-color: $c-media-bg-overlay-screen-color;
+    }
+  }
+}

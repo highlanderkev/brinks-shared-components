@@ -1,0 +1,185 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// -----------------------------------------------------------------------------
+// This is a Temporary location for legacy leadfeeder CSS until we get time to
+// do a more proper css refactoring.
+// -----------------------------------------------------------------------------
+
+$lf-breakpoints: (
+  md: map-get($grid-breakpoints, "md"),
+  mid: 860px
+);
+
+$lf-btn-width: $btn-width-lg;
+$lf-btn-height: 2.8227rem;
+$lf-btn-height-lg: 3rem;
+$lf-btn-padding-y: px-to-rem(15);
+$lf-btn-show-animation-duration: 0.2s;
+$lf-btn-box-shadow: -1px 0 6px 1px rgba(0, 0, 0, 0.1);
+
+$lf-btn-arrow-font-size-xs: 1.45rem;
+$lf-btn-arrow-font-size-md: 1.85rem;
+
+$navbar-height: 2.8888rem; // 52px
+$navbar-height-lg: 4.4444rem; // 80px
+
+// NOTE: keeping for future testing
+// $lf-shadow-pulse-rgba-full: rgba(0, 201, 177, 0.7);
+// $lf-shadow-pulse-rgba-empty: rgba(0, 201, 177, 0.0);
+
+.lf-btn-loaded {
+  .o-shadow-header {
+    transition: height $lf-btn-show-animation-duration ease-in-out;
+
+    @include media-breakpoint-down(sm) {
+      height: $navbar-height + $lf-btn-height;
+    }
+
+    @include media-breakpoint-only(md, $lf-breakpoints) {
+      height: $navbar-height-lg + $lf-btn-height;
+    }
+  }
+
+  #js-navbar-main {
+    margin-top: $lf-btn-height;
+    transition-timing-function: ease-in-out;
+    transition-duration: $lf-btn-show-animation-duration;
+    transition-property:  margin-top, background-color;
+
+    @include media-breakpoint-up(mid, $lf-breakpoints) {
+      margin: 0;
+    }
+  }
+
+  .navbar-toggleable-sm, .navbar-toggleable-md {
+    @include media-breakpoint-down(md) {
+      max-height: calc(100vh - 50px);
+      overflow: auto;
+    }
+  }
+}
+
+#lf-button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $zindex-fixed;
+  display: block;
+  width: 100%;
+  height: $lf-btn-height;
+  transition: none;
+
+  @include media-breakpoint-up(mid, $lf-breakpoints) {
+    top: 50%;
+    right: - $lf-btn-height-lg;
+    left: inherit;
+    width: $lf-btn-width;
+    height: $lf-btn-height-lg;
+    // padding-top: $lf-btn-padding-y;
+    // padding-bottom: $lf-btn-padding-y;
+    margin-top: - (($lf-btn-width / 2) + $lf-btn-height-lg);
+    box-shadow: $lf-btn-box-shadow;
+    transform: rotate(270deg);
+    transform-origin: 100% 100% 0;
+    animation: btn-slide 0.5s ease-out 1.4s forwards;
+
+    // NOTE: keeping for future testing
+    // box-shadow: 0 0 0 $lf-shadow-pulse-rgba-full;
+    // animation: slide 0.5s forwards;
+    // animation-delay: 1.4s;
+    // animation-timing-function: ease-in-out;
+    // animation: slide 0.4s ease-out 1.4s forwards,
+    //            box-shadow-pulse 1.5s ease 1.9s 5;
+  }
+
+  @include hover() {
+    color: $white;
+    background-color: theme-color("primary");
+    border-color: $white;
+  }
+}
+
+// NOTE - temporarily commenting to match design. May need to re-add
+//        base on exec feedback.
+// #lf-button::before {
+//   position: absolute;
+//   top: 0;
+//   left: 50%;
+//   font-family: "livewatch";
+//   font-size: $lf-btn-arrow-font-size-xs;
+//   line-height: $lf-btn-height;
+//   color: $white;
+//   content: "\e967"; // same as .icon-straight-arrow-right
+//   opacity: 0;
+//   animation: arrow-fade-slide-mobile 0.5s ease-out 1s 1 forwards;
+
+//   @include media-breakpoint-up(mid, $lf-breakpoints) {
+//     top: 3px;
+//     right: 0;
+//     left: auto;
+//     margin-top: 0;
+//     font-size: $lf-btn-arrow-font-size-md;
+//     line-height: $lf-btn-height-lg;
+//     color: theme-color("success");
+//     content: "\e968"; // same as .icon-straight-arrow-left
+//     animation: arrow-fade-slide-desktop 0.6s ease-out 1.45s 1 forwards,
+//                pulse 1.5s ease-in-out 2.2s 3 forwards;
+//   }
+// }
+
+.lf-brand-logo {
+  height: 25px;
+
+  @include media-breakpoint-up(sm) {
+    height: 30px;
+  }
+}
+
+@keyframes btn-slide {
+  100% {
+    right: 0;
+  }
+}
+
+// NOTE - temporarily commenting to match design. May need to re-add
+//        base on exec feedback.
+// @keyframes arrow-fade-slide-desktop {
+//   from {
+//     right: - 4.5rem;
+//     font-size: 0;
+//     opacity: 0;
+//   }
+
+//   to {
+//     right: - 2.5rem;
+//     font-size: $lf-btn-arrow-font-size-md;
+//     opacity: 1;
+//   }
+// }
+
+// @keyframes arrow-fade-slide-mobile {
+//   from {
+//     margin-left: - 8.5rem;
+//     font-size: 0;
+//     opacity: 0;
+//   }
+
+//   to {
+//     margin-left: - 5rem;
+//     font-size: $lf-btn-arrow-font-size-xs;
+//     opacity: 1;
+//   }
+// }
+
+// @keyframes pulse {
+//   from {
+//     transform: scale3d(1, 1, 1);
+//   }
+//   50% {
+//     transform: scale3d(1.1, 1.1, 1.1);
+//   }
+//   to {
+//     transform: scale3d(1, 1, 1);
+//   }
+// }

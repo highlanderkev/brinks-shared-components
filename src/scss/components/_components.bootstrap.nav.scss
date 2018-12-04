@@ -1,0 +1,135 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.10.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Nav Component
+// See: http://getbootstrap.com/docs/4.1/components/navs/
+// -----------------------------------------------------------------------------
+
+$navbar-collapse-nav-link-padding-y: $spacer * 0.75;
+
+$nav-underline-line-weight-stacked: 0.2223rem;
+$nav-underline-line-weight: 0.3334rem;
+$nav-underline-line-bottom: 0;
+$nav-underline-line-bottom-stacked: 0.28rem;
+$nav-underline-line-active-color: theme-color("dark");
+$nav-underline-line-hover-color: $gray-600;
+$nav-underline-nav-link-line-height: 2.3889rem;
+
+// Extensions/Overrides
+// -----------------------------------------------------------------------------
+
+.nav-link {
+  @extend %u-text--caps;
+  font-size: $h6-font-size--caps;
+}
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+.nav-underlined .nav-link {
+  position: relative;
+  padding-top: $spacer + $nav-underline-line-weight;
+  padding-right: 0;
+  padding-bottom: $spacer;
+  padding-left: 0;
+
+  .navbar & {
+    // Makes nav-link fill full height of navbar so underline is flush w/ bottom
+    margin-top: -$navbar-padding-y;
+    margin-bottom: -$navbar-padding-y;
+  }
+
+  // Create underline using pseudo-element
+  &::after {
+    position: absolute;
+    bottom: $nav-underline-line-bottom;
+    display: block;
+    width: 100%;
+    height: $nav-underline-line-weight;
+    content: "";
+  }
+
+  // Apply state-related styles to underline
+  &:hover::after { background-color: $nav-underline-line-hover-color; }
+  &.active::after { background-color: $nav-underline-line-active-color; }
+
+  // Scope-specific behavior
+  // ===========================================================================
+
+  .navbar-dark & {
+    // Keep utility links immune to hover state color changes
+    &.nav-link--utility { color: $white; }
+    &:hover::after,
+    &:focus::after { background-color: theme-color("warning"); }
+    &.active::after { background-color: theme-color("warning"); }
+  }
+
+  .navbar-collapse & {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  // Overrides for when nav is stacked inside collapse
+  .navbar-collapse.show &,
+  .navbar-collapse.collapsing & {
+    padding-top: $navbar-collapse-nav-link-padding-y;
+    padding-bottom: $navbar-collapse-nav-link-padding-y;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    &::after {
+      bottom: $nav-underline-line-bottom-stacked;
+      height: $nav-underline-line-weight-stacked;
+    }
+
+    &:focus::after { background-color: transparent}
+    &.active::after { background-color: theme-color("warning"); }
+  }
+
+  // Adjust nav-link line-height when navbar-brand is present, as it increases
+  // the total height of the navbar
+  .navbar-brand ~ &,
+  .navbar-brand ~ * & {
+    @include media-breakpoint-up(md) {
+      line-height: $navbar-brand-logo-height-sm;
+    }
+
+    @include media-breakpoint-up(lg) {
+      line-height: $nav-underline-nav-link-line-height;
+    }
+  }
+
+}
+
+// Do not underline utility links or dropdowns
+.nav-underlined .nav-link.nav-link--utility,
+.nav-underlined .dropdown .nav-link {
+  @include hover-focus-active {
+    &::after { background-color: transparent; }
+  }
+}
+
+// This class shouldnt be necessary.
+// Can accomplish this with better styles for dark color schemes
+.nav-footer {
+  @include text-all() {
+    color: $navbar-dark-color;
+  }
+
+  a { color: $navbar-dark-active-color; }
+}
+
+.nav-separator {
+  width: 1px;
+  height: 100%;
+  background-color: $border-color;
+
+  .navbar-dark & {
+    background-color: $white-muted;
+  }
+}
+

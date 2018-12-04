@@ -1,0 +1,32 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+//  The grid object serves as a namespace for blocks that make use of Bootstrap's
+//  grid system.
+//  -> Grid objects contain one or more column elements.
+//  -> A grid may be a single `.row`, or be a wrapper for multiple `.row`s.
+//
+// -----------------------------------------------------------------------------
+
+// Give responsive, vertical spacing to "rows" in a grid with n number of
+// columns. Uses negative margin to remove margin on last row.
+.o-grid-rowspaced {
+  // Negates margin-bottom in final row of grid
+  margin-bottom: -$block-spacer-mid-sm-down;
+
+  @include media-breakpoint-up(md) {
+    margin-bottom: -$block-spacer-mid-md-up;
+  }
+
+  &__col {
+    margin-bottom: $block-spacer-mid-sm-down;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: $block-spacer-mid-md-up;
+    }
+  }
+}

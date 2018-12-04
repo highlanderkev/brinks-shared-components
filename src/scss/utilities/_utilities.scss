@@ -1,0 +1,114 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Custom utility classes that are NOT extensions/modifiations of exisitng
+// Boostrap utility classes. Use `utilties.bootstrap.scss` for boostrap utility
+// extensions.
+// -----------------------------------------------------------------------------
+
+// Typography
+// -----------------------------------------------------------------------------
+
+// Special Styles
+//
+// These utilties apply more complex changes to a given text element.
+//
+// .u-text--caps  - Applies LiveWatch's custom all-caps appearance. In
+// addition to `text-transform: uppercase`, this branded style adds
+// `font-weight: bold`, and makes some small adjustments to `letter-spacing`
+// (for better readability) and `font-size` (to compensate for the larger
+// appearance of caps text at a given font-size).
+// %u-text--caps  - A Sass silent class version of the utility class above.
+// `@extend` this silent class to apply LiveWatch-style all caps to other
+// components in scss.
+// .u-text-mark  - Applies Brinks Homes's custom superscript style for when a
+// mark such as TM and Registered are placed at the end of a word.
+//
+// Styleguide utilities/typography
+.u-text--caps {
+  @extend %u-text--caps;
+
+  @at-root h3#{&} { font-size: $h3-font-size--caps; }
+  @at-root .h3#{&} { font-size: $h3-font-size--caps; }
+  @at-root h4#{&} { font-size: $h4-font-size--caps; }
+  @at-root .h4#{&} { font-size: $h4-font-size--caps; }
+  @at-root h5#{&} { font-size: $h5-font-size--caps; }
+  @at-root .h5#{&} { font-size: $h5-font-size--caps; }
+  @at-root h6#{&} { font-size: $h6-font-size--caps; }
+  @at-root .h6#{&} { font-size: $h6-font-size--caps; }
+}
+
+$heading-lg-mark-size: 30%;
+
+.u-text-mark {
+  top: -0.8em;
+  margin-left: 0.15em;
+  font-size: 40%;
+  font-weight: $font-weight-normal;
+}
+
+@include headings-large {
+  .u-text-mark {
+    top: -1.65em;
+    margin-left: 0;
+    font-size: $heading-lg-mark-size;
+  }
+}
+
+// Links
+//
+// Custom utilities for links and clickable elements.
+//
+// .u-link--unstyled  - removes link color and hover behavior, making the link
+// appear like normal text.
+// .u-pointer  - applies `cursor: pointer` to an element, useful for letting the user know
+// an element is clickable in cases where using a `<button>` or `<a>` tag isn't practical.
+//
+// Styleguide utilities/typography
+.u-link--unstyled { @extend %u-link--unstyled; }
+
+.u-pointer { cursor: pointer; }
+
+// Animations
+//
+// Apply [css transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions),
+// which animate dynamic style changes to an element (i.e. via jQuery).
+//
+// .u-transition--a - applies a 0.35s transition to *all* css properties that change as a result of adding/removing a class/s.
+// .u-transition--bg - applies a 0.35s transition to changes to `background-color`.
+//
+// Styleguide utilities/animations
+.u-transition--a {
+  transition: all 0.35s ease-in-out;
+}
+
+.u-transition--bg {
+  transition: background-color 0.35s ease-in-out;
+}
+
+.u-frame-white {
+  outline: $bhs-frame-width solid $white;
+  outline-offset: - $bhs-frame-width;
+}
+
+// Icons
+//
+// A series of sizing classes for fine-tuning the size of icons.
+//
+// .icon-{1, 2, 3, 4, 5, 6, 7, 8, 9, 10} - add one of these to the SVG element to get the desired size.
+//
+// Styleguide utilities/icons
+
+.icon {
+  @each $name,
+  $size in $icon-sizes {
+    &-#{$name} {
+      width: $size;
+      height: $size;
+    }
+  }
+}

@@ -1,0 +1,67 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 08.03.18
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Provide special structure and sizing for Sections that also function as
+// Heroes. (first section)
+// -----------------------------------------------------------------------------
+
+// Standard full height hero. For most desktop browsers, this will fill most of
+// of the height of the viewport, while leaving some of the next section
+// visible so users know they can scroll.
+.o-hero {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 9rem);
+  min-height: 30rem; // 540px at standard zoom
+
+  // Keep height from getting outta hand
+  @include media-breakpoint-up(lg) {
+    min-height: 34rem; // 612px at standard zoom
+    max-height: 40rem; // 720px ...
+  }
+}
+
+.o-hero--md {
+  @include media-breakpoint-down(sm) {
+    height: auto;
+    min-height: auto;
+  }
+}
+
+// Hero that takes up 50% of viewport not occupied by the navbar
+.o-hero--50 {
+  height: calc(50vh - 2.7rem); // temp hardcoding until final navbar height available
+  min-height: 18rem; // 324px at standard zoom
+
+  @include media-breakpoint-up(lg) {
+    max-height: 26rem; // 468px ...
+  }
+}
+
+.o-hero > .container {
+  // ensure container uses full height to allow for easy
+  // positioning of content within (i.e. via flex)
+  flex-grow: 1;
+
+  // Provide automatic vertical centering for content on larger
+  // screens
+  @include media-breakpoint-up(md) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.o-hero__banner {
+  // Ensure banner doesn't overlap left/right sides of the
+  // background image's frame (border)
+  .c-media-bg & {
+    margin-right: $bhs-frame-width;
+    margin-left: $bhs-frame-width;
+  }
+}
+

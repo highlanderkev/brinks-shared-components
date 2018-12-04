@@ -1,0 +1,54 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.19.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Table
+// See: http://getbootstrap.com/docs/4.1/content/tables/
+// -----------------------------------------------------------------------------
+
+$table--large-cell-padding: $spacer-4;
+
+// Extensions / Overrides
+// -----------------------------------------------------------------------------
+
+.table {
+  // Give appearance of label/caps header
+  th {
+    @extend %u-text--caps;
+    border-top: 0;
+  }
+
+  // Resets to let table handle vertical spacing for first/last elements
+  // within cells
+  td *:last-child,
+  th *:last-child {
+    margin-bottom: 0;
+  }
+
+  td *:first-child,
+  th *:first-child {
+    margin-top: 0;
+  }
+}
+
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+.table-sm-sm-down {
+  @include media-breakpoint-down(sm) {
+    th,
+    td {
+      padding: $table-cell-padding-sm;
+    }
+  }
+}
+
+.table--td-align-middle {
+  tbody td {
+    vertical-align: middle;
+  }
+}

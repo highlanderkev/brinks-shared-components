@@ -1,0 +1,79 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.23.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Media Object
+// See: http://getbootstrap.com/docs/4.1/layout/media-object
+// -----------------------------------------------------------------------------
+
+// Overrides / Extensions
+// -----------------------------------------------------------------------------
+
+// Adds spacing on between stacking media elements on mobile
+@include media-breakpoint-down(sm) {
+  .media-right,
+  .media-left + .media-body {
+    margin-top: $block-spacer-lil-sm-down;
+  }
+}
+
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+$media-object-app-scrn-max-width: 16.7rem;
+
+// Hides overflow of image object within. This allows masking of image on one
+// or more edges.
+.media-overflow-hide {
+  overflow: hidden;
+
+  // Mobile app screenshot media object
+  &__object-app-scrn {
+    width: 100%; // Fill container horizontally
+    margin-bottom: -30%; // Clip bottom of screenshot
+
+    @include media-breakpoint-up(md) {
+      // Keep images from getting really big on larger screens
+      max-width: $media-object-app-scrn-max-width;
+
+      // Center image
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+}
+
+// On larger screens, .media-dual-body is a 3-column variant of .media where
+// the media-object is in the center col with a media-body on both sides.
+//
+// On smaller screens, the media object stacks to the top, and the two
+// .media-bodys stack below, appearing like a single media-body.
+.media-dual-body {
+  // The media object (image/vid) at occupies the center col.
+  .media-center {
+    @include media-breakpoint-down(sm) {
+      // Give it some logical spacing in a stacking context (mobile)
+      margin-bottom: $block-spacer-mid-sm-down;
+
+      // Make it the first element in the stack
+      order: -1;
+    }
+  }
+
+  .media-body {
+    @include media-breakpoint-down(sm) {
+      // Override .media's inline flex behavior to make media-bodys stack
+      flex: 0 1 auto;
+
+      // Add vertical spacing between above media-bodys
+      margin-top: $block-spacer-mid-sm-down;
+
+      // Reset bottom spacing on final media-body section
+      &:last-child { padding-bottom: 0; }
+    }
+  }
+}

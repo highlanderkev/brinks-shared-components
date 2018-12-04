@@ -1,0 +1,119 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 07.12.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Display a series of steps separated by an arrow. Steps will be inline on
+// Medium up screens, and stacking on smalls screens.
+// -> NOTE: Currently assumes 3 or less steps.
+//
+// TODO: Support more than 3 steps. Could use mixin to generate
+// `c-steps-[num of steps]` classes.
+// -----------------------------------------------------------------------------
+
+$c-steps-item-icon-number-diameter: 2em;
+$c-steps-item-icon-side-length: px-to-rem(75);
+$c-steps-item-icon-side-length-sm: px-to-rem(50);
+$c-steps-item-icon-margin-bottom: $spacer;
+
+$c-steps-divider-spacing-x: 3%;
+$c-steps-divider-max-width: px-to-rem(130);
+$c-steps-divider-icon-side-length: px-to-rem(65);
+$c-steps-divider-icon-width-sm: px-to-rem(50);
+$c-steps-divider-icon-height-sm: px-to-rem(40);
+
+.c-steps {
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    justify-content: between;
+    align-items: start;
+  }
+
+  .icon { color: theme-color("primary"); }
+}
+
+.c-steps__item {
+  @include make-row();
+
+  // TODO move this custom column logic to a mixin
+  @include media-breakpoint-up(md) {flex: 1 0 0;}
+}
+
+.c-steps__item-icon {
+  @include make-col-ready();
+  flex: 0 0 auto; // col-auto equivalent
+  width: auto; // col-auto equivalent
+
+  @include media-breakpoint-up(md) {
+    @include make-col(5);
+    margin-bottom: $c-steps-item-icon-margin-bottom;
+  }
+
+  .icon {
+    width: $c-steps-item-icon-side-length-sm;
+    height: $c-steps-item-icon-side-length-sm;
+
+    @include media-breakpoint-up(md) {
+      width: $c-steps-item-icon-side-length;
+      height: $c-steps-item-icon-side-length;
+    }
+  }
+
+  &-number {
+    display: block;
+
+    &::after {
+      display: block;
+      width: $c-steps-item-icon-number-diameter;
+      height: $c-steps-item-icon-number-diameter;
+      margin: 0 auto;
+      line-height: $c-steps-item-icon-number-diameter;
+      color: $white;
+      content: counter(step);
+      counter-increment: step;
+      background-color: theme-color("dark");
+      border-radius: 50%;
+    }
+  }
+}
+
+.c-steps__item-text {
+  @include make-col-ready();
+  flex-basis: 0;
+  flex-grow: 1;
+
+  @include media-breakpoint-up(md) {
+    @include make-col(12);
+  }
+}
+
+
+.c-steps__divider {
+  margin-bottom: $spacer-2;
+
+  @include media-breakpoint-up (md) {
+    max-width: $c-steps-divider-max-width;
+    padding-right: $c-steps-divider-spacing-x;
+    padding-left: $c-steps-divider-spacing-x;
+    margin-top: $c-steps-item-icon-side-length + $c-steps-item-icon-margin-bottom;
+    margin-bottom: 0;
+    transform: rotate(-90deg);  // Rotate icon
+  }
+
+  .icon {
+    width: $c-steps-divider-icon-width-sm;
+    height: $c-steps-divider-icon-height-sm;
+
+    @include media-breakpoint-up (md) {
+      width: $c-steps-divider-icon-side-length;
+      height: $c-steps-divider-icon-side-length;
+    }
+  }
+}
+
+.c-steps--ordered { counter-reset: step; }

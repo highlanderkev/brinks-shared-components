@@ -1,0 +1,59 @@
+// =============================================================================
+//          (c) Copyright 2017 by LiveWatch Security LLC | Evanston, IL, USA
+// =============================================================================
+// Created at: 1.20.17 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Hacks to negate bugs and other oddities in specific browsers
+// -----------------------------------------------------------------------------
+
+
+// Hack class to disable ugly, tiny number steppers in Chrome on text inputs
+// with type="number"
+
+._input--no-spinner {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    margin: 0;
+    -webkit-appearance: none;
+  }
+
+  -moz-appearance: textfield;
+}
+
+// FB in-app browser hack fixes
+@include media-breakpoint-down(sm) {
+  html._fb-app-vp-fix {
+    position: relative;
+
+    .modal-stretch--sm-down {
+      position: absolute;
+      overflow: visible;
+    }
+  }
+}
+
+// IE11 fixes
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  // Keep flex children of parents with `flex-direction: column` from stretching
+  // to fill parent (which is not normal behavior)
+  .flex-column > * {
+    min-height: 1px;
+  }
+
+  // Gently remind IE11 how to left align a 50% width <hr>
+  hr.w-50 {
+    margin-right: 50%;
+  }
+}
+
+// Scrolling Fixes
+.prevent-scrolling {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.ios-natural-scrolling {
+  -webkit-overflow-scrolling: touch;
+}

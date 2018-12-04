@@ -1,0 +1,76 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// This file contains grid-related Sass mixins.
+// - Use `_` prefix for local variable and parameter names in mixins/functions.
+// =============================================================================
+
+/// Create a custom responsive grid system from a SASS map of column ratios.
+///
+/// @param {number} $_list-column-ratio - Map containing the column ratio per media breakpoint
+/// @param {list} $listColumnClasses - List of names for the columns
+/// @param {boolean} $_columns-swap - Swap the columns
+/// @param {size value} $_columns-gutter - gutter size
+/// @output Returns a complete and responsive grid system
+@mixin make-reponsive-columns($_list-column-ratio, $_list-column-names, $_columns-swap: false, $_column-gutter: $grid-gutter-width) {
+  //set total number of columns
+  $_total-columns: length($_list-column-names);
+
+  // Check for valid arguments
+  @if $_total-columns < 2 {
+    @error "Oopsy: Specify more than one column. Check argument <$_list-column-names>";
+  }
+
+  @if $_total-columns > 2 and $_columns-swap {
+    @error "Oopsy: Swapping the columns is only supported for 2 rows";
+  }
+
+  // Loop the argument $_list-column-names, which is a list of the columns names
+  @for $_this-column-counter from 1 through $_total-columns {
+    // Get the column name
+    $_this-column-name: nth($_list-column-names, $_this-column-counter);
+
+    // Create the outer CSS for the column
+    &#{$_this-column-name} {
+      // Make the column
+      @include make-col-ready();
+
+      // Make the column spanning, loop over the media breakpoints
+      @each $_media-breakpoint, $_num-of-spans in $_list-column-ratio {
+        @if length($_num-of-spans) < 2 {
+          @error "Oopsy: Specify more than one column. Check argument <$_list-column-ratio>";
+        }
+
+        // Get the number of columns to span from the list
+        $_this-num-of-spans: nth($_num-of-spans, $_this-column-counter);
+
+        // Compare the length of the lists
+        @if length($_list-column-names) != length($_num-of-spans) {
+          @error "Oopsy: The number of row must match the number of column names. Check arguments <$listColumnClasses> and <$_list-column-ratio>";
+        }
+
+        // Create a media breakpoint
+        @include media-breakpoint-up($_media-breakpoint) {
+          // Create the column span
+          @include make-col($_this-num-of-spans);
+
+          // Swap the columns
+          @if $_columns-swap and $grid-columns != $_this-num-of-spans {
+            // First column swaps to the right
+            @if $_this-column-counter == 1 {
+              @include make-col-push($grid-columns - $_this-num-of-spans);
+
+            } @else {
+              // Second column swaps to the left
+              @include make-col-pull($grid-columns - $_this-num-of-spans);
+            }
+          }
+        }
+      }
+    }
+  }
+}

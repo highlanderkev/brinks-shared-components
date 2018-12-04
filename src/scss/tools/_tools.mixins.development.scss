@@ -1,0 +1,61 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Helpers for development
+// - Use `_` prefix for local variable and parameter names in mixins/functions.
+// =============================================================================
+
+// Please use SASSDOC
+// - http://sassdoc.com/annotations/
+// -----------------------------------------------------------------------------
+
+/// This mixin displays the actual viewport in the left top corner
+/// @author Martin Schaible
+/// @output Displays the actual viewport in the left top corner
+@mixin show-bootstrap-viewports() {
+  $background-color: #222;
+
+  body::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999999;
+    padding: 0 0.25rem;
+    font-size: $font-size-xs;
+    color: #fff;
+    content: "Extra small, xs, 0";
+    background-color: $background-color;
+  }
+
+  @include media-breakpoint-up(sm) {
+    body::before {
+      content: "Small, sm, 544px";
+      background-color: lighten($background-color, 10%);
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    body::before {
+      content: "Medium, md, 768px";
+      background-color: lighten($background-color, 15%);
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    body::before {
+      content: "Large, lg, 992px";
+      background-color: lighten($background-color, 20%);
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    body::before {
+      content: "Extra Large, xl, 1200px";
+      background-color: lighten($background-color, 25%);
+    }
+  }
+}

@@ -1,0 +1,50 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 07.05.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Color overrides to child elements within the Brinks Home Dark Theme.
+// -----------------------------------------------------------------------------
+
+$t-dark-body-color: $white;
+$t-dark-highlight-color: $brinks-teal;
+$t-dark-accent-color: $brinks-yellow;
+
+.t-dark {
+  color: $t-dark-body-color;
+  border-color: $t-dark-highlight-color;
+  h1, .h1,
+  h3, .h3,
+  a:not(.btn),
+  a.btn-link { color: $t-dark-highlight-color; }
+
+  h2, .h2,
+  label,
+  .c-price { color: $t-dark-body-color; }
+
+  @include headings-small { color: $t-dark-body-color; }
+
+  .text-muted { color: $white-muted !important; }
+
+  .list-bulleted li::before,
+  .list-bulleted-icons .icon { color: $t-dark-accent-color; }
+
+  .c-steps__divider .icon { color: $t-dark-highlight-color; }
+  .c-steps__item-icon .icon { color: $t-dark-body-color; }
+  .c-price--strike::before { border-bottom-color: $t-dark-highlight-color;}
+
+  //Override for the c-media classes where t-dark shares the same border color as bg-info
+  &.c-media-bg { border-color: $t-dark-body-color; }
+}
+
+.bg-info {
+  &,
+  .border,
+  .border-top,
+  .border-right,
+  .border-bottom,
+  .border-left { border-color: $t-dark-body-color !important; }
+
+}

@@ -1,0 +1,235 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.19.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Buttons Components
+// See: http://getbootstrap.com/docs/4.1/components/buttons/
+// -----------------------------------------------------------------------------
+
+$btn__icon-spacing-x: 0.15rem;
+$btn__icon-offset-y: -0.3rem;
+$btn__icon-spinner-opacity: 0.5;
+$btn__icon-font-size: 1.25rem;
+
+$btn-floating-diameter: 55px;
+$btn-floating-box-shadow: 0 2px 5px $black-trans;
+
+$btn-next-prev-icon-outset: 0.2rem;
+$btn-next-prev-icon-outset-lg: 0.375rem;
+$btn-next-prev-icon-spacing-x: 0.45rem;
+$btn-next-prev-icon-spacing-x-lg: 0.6rem;
+
+$btn-box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.18);
+
+// Extensions/Overrides
+// -----------------------------------------------------------------------------
+
+.btn {
+  cursor: pointer;
+
+  // Make non-link buttons all-caps
+  &:not(.btn-link) {
+    @extend %u-text--caps;
+    font-size: $h6-font-size--caps;
+
+    &.btn-sm { font-size: $font-size-sm--caps; }
+  }
+
+  // Remove focus ring
+  &:focus {
+    box-shadow: none;
+  }
+
+  // Increase default horizontal spacing between buttons
+  & + & {
+    margin-left: $spacer-2;
+  }
+
+  // Make link buttons bold like our links
+  &-link { font-weight: $btn-font-weight; }
+}
+
+.btn-primary {
+  text-shadow: $text-shadow;
+}
+
+//Update Long Button size
+.btn-lg {
+  padding: $btn-padding-y $btn-padding-x-lg;
+  min-width: $btn-width-lg;
+
+//button padding on extra small devices
+  @media (max-width: $breakpoint-xxs) {
+    padding: $btn-padding-y $btn-padding-x;
+  }
+}
+
+// Make hover/active color for outline button brand-appropriate
+// Note:the new button configurations makes this style outdated
+.btn-outline-secondary {
+  color: theme-color("primary");
+
+  @include hover {
+    color: $link-hover-color;
+    background-color: $white;
+    border-color: theme-color("primary");
+  }
+
+  &:active,
+  &.active,
+  .show > &.dropdown-toggle {
+    color: $white;
+    background-color: theme-color("dark");
+    border-color: theme-color("dark");
+  }
+}
+
+// Make green button pop more over dark backgrounds
+.btn-primary {
+  .navbar-dark &,
+  .bg-primary & {
+    box-shadow: $btn-box-shadow;
+  }
+}
+
+.btn-warning { color: theme-color("dark"); }
+
+//Update hover styles to reflect each button style
+.btn:hover {
+  background-color: transparent;
+}
+
+.btn-primary:hover {
+  color:  theme-color("primary");
+  border-color: theme-color("primary");
+}
+
+.btn-success:hover,
+.btn-warning:hover {
+  color: $white;
+  border-color: $white;
+}
+
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+// Modifiers to existing Bootstrap button classes to give buttons responsive
+// behavior.
+//
+// .btn-block--xs-down  - Makes a button block-level only on `xs`-size devices.
+// This is a common UX pattern on smartphones.
+// .btn-block--sm-down  - Makes a button block-level only on `sm`-size devices
+// and below.
+// .btn-block--md-down  - Makes a button block-level only on `md`-size devices
+// and below.
+//
+// Styleguide buttons/responsive
+
+
+// Local mixin to keep DRY
+@mixin btn-block-bp-down($bp) {
+  .btn-block--#{$bp}-down {
+    @include media-breakpoint-down($bp) {
+      display: block;
+      width: 100%;
+
+      & + & {
+        margin-top: $btn-block-spacing-y;
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+@include btn-block-bp-down(xs);
+@include btn-block-bp-down(sm);
+@include btn-block-bp-down(md);
+
+
+// Provide more context for a button by including an icon.
+//
+// To use, apply the `.btn\_\_icon` class and any modifiers to an `<i>` tag with the
+// desired `icon-*` class and wrap the button text in a `<span>`. The default
+// `.btn\_\_icon` styles are intended for left-aligned icons.
+//
+// .btn__icon--right  - Makes some margin adjustments for right-aligned icons.
+// .btn__icon-spinner - Sets up the button for use with an animated spinner
+// (hidden by default). Add `.is-loading` to the parent `.btn` to show and
+// animate the spinner.
+//
+// Styleguide buttons/icon
+.btn .btn__icon {
+  font-size: $btn__icon-font-size;
+  line-height: 0;
+  vertical-align: $btn__icon-offset-y;
+}
+
+// Combine with attribute selector to overide default icon-* margins
+.btn__icon,
+.btn__icon[class*=" icon-"],
+.btn__icon[class^="icon-"] {
+  margin-right: $btn__icon-spacing-x;
+}
+
+.btn__icon--right,
+.btn__icon--right[class*=" icon-"],
+.btn__icon--right[class^="icon-"] {
+  margin-left: $btn__icon-spacing-x;
+}
+
+.btn__icon-spinner {
+  display: none;
+  opacity: $btn__icon-spinner-opacity;
+  animation: spin 1500ms infinite linear;
+
+  // Only show spinner when btn is loading
+  .btn.is-loading & {
+    display: inline-block;
+  }
+}
+
+.btn-floating {
+  display: flex;
+  width: $btn-floating-diameter;
+  height: $btn-floating-diameter;
+  border-radius: 50%;
+  box-shadow: $btn-floating-box-shadow;
+
+  .btn__icon {
+    align-self: center;
+  }
+}
+
+// TODO: refactor to work with new icon set
+
+.btn-next::after,
+.btn-prev::before {
+  font-size: 0.9em;
+}
+
+.btn-next::after {
+  padding-left: $btn-next-prev-icon-spacing-x;
+  margin-right: -($btn-next-prev-icon-outset);
+  content: "";
+  background-image: "url('/dist/icons/symbol-defs.svg#icon-chevron-right')";
+}
+
+.btn-prev::before {
+  padding-right: $btn-next-prev-icon-spacing-x;
+  margin-left: -($btn-next-prev-icon-outset);
+  content: "\e903";
+}
+
+.btn-lg.btn-next::after {
+  padding-left: $btn-next-prev-icon-spacing-x-lg;
+  margin-right: -($btn-next-prev-icon-outset-lg);
+}
+
+.btn-lg.btn-prev::before {
+  padding-right: $btn-next-prev-icon-spacing-x-lg;
+  margin-left: -($btn-next-prev-icon-outset-lg);
+}

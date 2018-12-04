@@ -1,0 +1,45 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.18.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Shadow objects mimic the height of a target fixed position element. When
+// placed after a fixed element, subsequent DOM elements will be pushed down
+// by the height of the fixed element, thus preventing content overlap.
+//
+// TODO: figure out a better way than hardcoding to set a default height for the
+// Shadows
+// -----------------------------------------------------------------------------r
+
+$o-shadow-subnav-height: 56px;
+$o-shadow-banner-height: 41px;
+
+// Assign default heights to shadows to reduce FOUC
+// -----------------------------------------------------------------------------r
+.o-shadow-header {
+  height: $navbar-height-xs;
+
+  @include media-breakpoint-up(md) {
+    height: $navbar-height-md;
+  }
+
+  @include media-breakpoint-up(lg) {
+    height: $navbar-height-lg;
+  }
+}
+
+// Subnav currently hidden on page-load on mobile
+// so no need for default height there.
+.o-shadow-subnav {
+  height: 0;
+
+  @include media-breakpoint-up(md) {
+    height: $o-shadow-subnav-height;
+  }
+}
+
+.o-shadow-banner {
+  height: $o-shadow-banner-height;
+}

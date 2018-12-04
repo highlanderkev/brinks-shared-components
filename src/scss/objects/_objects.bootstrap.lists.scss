@@ -1,0 +1,116 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.18.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions/overrides to bootstrap's list classes
+// -----------------------------------------------------------------------------
+
+$list-custom-padding-left: 1.2em;
+$list-custom-checks-padding-left: 1.5em;
+$list-spaced-spacing-y: $spacer-2;
+$list-icon-indent: 2.2rem;
+$list-icon-indent-small: 1.8rem;
+$list-icon-font-size: 1.4em;
+$list-icon-font-size-small: 1.1em;
+$list-icon-spacing-top: 0.1em;
+$list-icon-spacing-top-small: 0.25em;
+$list-icon-min-width: 1.35rem;
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+// List Additions
+//
+// .list-spaced - Adds additional vertical spacing between list items; important
+// for distinguishing a plain-text list from a `<p>` or other basic text element.
+// .list-spaced--md-down - adds additional vertical spacing at or below `md`
+// breakpoint. Useful for increasing click target sizes on mobile.
+// .list-ordered - replaces the default ordered list numerals with more branded numerals.
+// .list-bulleted - Since we rarely use bullets in unordered lists, our standard
+// `ul` uses Bootstrap's `list-unstyled` by default (no bullets or left padding
+// on list items). This class adds bullets/padding *back* to the list and should
+// be used very sparingly – i.e. in articles and docs where plain bullets
+// (very ugly) make sense.
+// .list-bulleted-icons - A bulleted list with custom icon font elements instead
+// of the default bullets. Use in conjunction with `list-spaced` to avoid a
+// crammed look.
+// .list-bulleted-icons--small - a variant of `list-bulleted-icons` with smaller
+// icons.
+//
+// Styleguide typography/lists
+.list-spaced {
+  li + li { margin-top: $list-spaced-spacing-y; }
+}
+
+.list-spaced--md-down {
+  @include media-breakpoint-down(md) {
+    li + li { margin-top: $spacer-2; }
+  }
+}
+
+.list-bulleted,
+.list-ordered {
+  padding-left: $list-custom-padding-left;
+  list-style: none;
+
+  li::before {
+    display: inline-block;
+    width: $list-custom-padding-left;
+    margin-left: -$list-custom-padding-left;
+    color: theme-color("primary");
+  }
+}
+
+.list-bulleted li::before {
+  content: "•";
+}
+
+.list-ordered {
+  counter-reset: item;
+
+  li {
+    counter-increment: item;
+  }
+
+  li::before {
+    content: counter(item);
+    font-weight: $font-weight-bold;
+  }
+}
+
+.list-bulleted-icons,
+.list-bulleted-icons--small {
+  @extend .list-spaced !optional;
+
+  > li { position: relative; }
+
+  .icon {
+    position: absolute;
+    color: theme-color("primary");
+  }
+}
+
+.list-bulleted-icons {
+  margin-left: $list-icon-indent;
+
+  .icon {
+    top: $list-icon-spacing-top;
+    left: -($list-icon-indent);
+    min-width: $list-icon-min-width;
+    font-size: $list-icon-font-size;
+    text-align: center;
+  }
+}
+
+.list-bulleted-icons--small li::before {
+  margin-left: $list-icon-indent-small;
+
+  [class^="icon-"] {
+    top: $list-icon-spacing-top-small;
+    left: -($list-icon-indent-small);
+    font-size: $list-icon-font-size-small;
+  }
+}

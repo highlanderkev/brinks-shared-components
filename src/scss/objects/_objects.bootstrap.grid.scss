@@ -1,0 +1,90 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 07.25.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Grid classes
+// See: http://getbootstrap.com/docs/4.1/layout/grid/
+// -----------------------------------------------------------------------------
+
+
+// Overrides / Extensions
+// -----------------------------------------------------------------------------
+
+.container {
+  // Bootstrap's gutters are the same at all breakpoints. Let's make
+  // them responsive.
+  @each $_breakpoint, $_gutter-width in $container-gutter-widths {
+    @include media-breakpoint-up($_breakpoint, $grid-breakpoints) {
+      padding-right: $_gutter-width / 2;
+      padding-left: $_gutter-width / 2;
+    }
+  }
+}
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+// A flexible width column class that fills the horizontal space not take up
+// by other cols, and has standard column gutter-spacing.
+.col-fluid {
+  padding-right: ($grid-gutter-width / 2);
+  padding-left:  ($grid-gutter-width / 2);
+}
+
+//Classes to create vertical borders for screen size md and lg respectively,
+//The border switches to a horizontal one when the screen switches to less than the
+//media breakpoint.
+
+.row--divided-md,
+.row--divided-lg {
+  > [class^='col']:not(:last-of-type) { border-bottom: $bhs-frame-border; }
+}
+
+// Generate row--divided CSS.
+// `$breakpoint`: The Bootstrap breakpoint code at which the row's divider
+// should switch from horizontal to vertical
+@mixin make-row-divided($breakpoint) {
+  .row--divided-#{$breakpoint} {
+    // Show horizontal border between sections on mobile
+    > [class^='col']:not(:last-of-type) { border-bottom: $bhs-frame-border; }
+
+    @include media-breakpoint-up($breakpoint) {
+      // Hide horizontal border when hits specified breakpoint and show
+      // Verical border
+      > [class^='col']:not(:last-of-type) { border-bottom: 0; }
+      > [class^='col']:not(:first-of-type) { border-left: $bhs-frame-border; }
+
+      // Add option to reverse the column order at the specified breakpoint
+      &.row--divided-reverse {
+        flex-direction: row-reverse;
+
+        > [class^='col']:not(:first-of-type) {
+          border-right: $bhs-frame-border;
+          border-left: 0;
+        }
+      }
+    }
+  }
+}
+
+@include make-row-divided(md);
+@include make-row-divided(lg);
+
+// Make the row's total height auto-adjust to be double the height of it's content.
+// This allows the bottom half of the background to remain fully visible.
+// Note: content must be a single element
+.row--h-2x {
+  display: grid;
+  grid-auto-rows: 1fr;
+
+  &::after {
+    content: "";
+  }
+
+  @include media-breakpoint-up(lg) {
+    display: flex;
+  }
+}

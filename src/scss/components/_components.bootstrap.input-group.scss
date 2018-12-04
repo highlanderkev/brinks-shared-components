@@ -1,0 +1,35 @@
+// =============================================================================
+//          (c) Copyright 2017 by LiveWatch Security LLC | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.05.17
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap's Input Group component
+// See: http://getbootstrap.com/docs/4.1/components/input-group/
+// -----------------------------------------------------------------------------
+
+// Extensions/Overrides
+// -----------------------------------------------------------------------------
+
+// Make form control border darker when grouped with a button
+
+.input-group-btn ~ .form-control {
+  border-color: $gray-600;
+}
+
+// Custom appearance for input group addons that removes border
+// between the addon and input itself
+
+.input-group {
+  border: $input-border-width solid $input-border-color;
+  @include transition($input-transition);
+
+  .form-control,
+  .input-group-text { border: 0; }
+
+  &:focus-within { border-color: $input-focus-border-color; }
+}
+
+.input-group-prepend .input-group-text { padding-right: 0; }
+.input-group-append .input-group-text { padding-left: 0; }

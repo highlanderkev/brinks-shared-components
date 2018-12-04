@@ -1,0 +1,18 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 08.18.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Helper mixins and silent classes for flexbox.
+// - Use `_` prefix for local variables and parameter names in mixins/functions.
+// -----------------------------------------------------------------------------
+
+%pos-a-cover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}

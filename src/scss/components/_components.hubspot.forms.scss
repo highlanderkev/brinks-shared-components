@@ -1,0 +1,33 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 06.28.16 by Charles Currier
+// Project   : HubSpot
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Forms Component
+// See: http://getbootstrap.com/docs/4.1/components/forms/
+// -----------------------------------------------------------------------------
+
+// Overrides / Extensions
+// -----------------------------------------------------------------------------
+
+// Apply Bootstrap styles to HubSpot-applied input class
+.hs-input {
+  @extend .form-control;
+}
+
+// scss-lint:disable SelectorFormat
+[class^="form-columns-"], [class*=" form-columns-"], .hs_submit {
+  @extend .form-group;
+}
+// scss-lint:enable SelectorFormat
+
+// Hack Bootstrap validation styles onto HubSpot forms
+.form-control-danger {
+  border-color: theme-color("danger");
+}
+
+.label-danger label {
+  color: theme-color("danger");
+}

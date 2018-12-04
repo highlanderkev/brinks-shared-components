@@ -1,0 +1,151 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.16.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Custom price component
+// -----------------------------------------------------------------------------
+
+$c-price__value-font-size: $h1-font-size;
+$c-price__value-font-size-md: $component-alternate-h1-font-size;
+$c-price__value-font-size--small: $h3-font-size;
+$c-price__value-font-size--mini: $h5-font-size;
+$c-price__superscript-size-ratio: 0.566;
+$c-price__strike-border-width: px-to-rem(6);
+$c-price__strike-border-width--small: px-to-rem(4);
+$c-price__strike-border-width--mini: px-to-rem(2);
+$c-price__strike-color-light: $brinks-blue;
+$c-price__strike-right-pos: -5%;
+$c-price__strike-top-pos: 45%;
+$c-price__strike-rotation: -20deg;
+
+// In accordance with LiveWatch brand, all prices should use the more stylized
+// `c-price` component, rather than plain text. As a fully custom component,
+// `c-price` uses BEM-style naming and structure.
+//
+// .c-price - block-level wrapper for the component.
+// .c-price-secondary - variant of `c-price` with a thinner font weight on `c-price\__value`. Use to deemphasize a price relative to other prices.
+// .c-price-muted - variant of `c-price` with muted (gray) text color
+// .c-price__currency - class to be applied to the currency marker element (i.e. "$").
+// .c-price__value - class to be applied to the element containing the value of
+// the price.
+// .c-price__cents - class to be applied to price's cents, if needed.
+// .c-price__period - (when applicable) class to be applied to the element
+// containing the time period of a recurring price (i.e. "/ mo.", "/ yr.")
+// .c-price--small - A modifier of `c-price` that gives the entire component
+// a small font-weight.
+// .c-price--small-sm - applies `c-price--small` only on sm-down breakpoints.
+// .c-price--strike - class to apply diagonal strikethough on prices
+
+// Styleguide typography/prices
+
+.c-price {
+  padding-right: 0.4em; // Offset so appears centered when `text-align: center`
+  font-weight: $font-weight-bold;
+  line-height: $headings-line-height;
+  color: $brinks-blue;
+
+  &__currency,
+  &__value,
+  &__cents {
+    display: inline-block;
+  }
+
+  &__currency,
+  &__cents {
+    font-size: $c-price__value-font-size * $c-price__superscript-size-ratio;
+    vertical-align: 0.45em;
+
+    @include media-breakpoint-up(md) {
+      font-size: $c-price__value-font-size-md * $c-price__superscript-size-ratio;
+    }
+  }
+
+  &__value,
+  &__period {
+    font-size: $c-price__value-font-size;
+
+    @include media-breakpoint-up(md) {
+      font-size: $c-price__value-font-size-md;
+    }
+  }
+
+  &__currency {
+    margin-right: - 0.15rem;
+  }
+
+  &__cents {
+    margin-left: - 0.07rem;
+  }
+
+  &__period {
+    text-transform: lowercase;
+  }
+
+  &--strike {
+    position: relative;
+    display: inline-block;
+    color: theme-color("dark");
+
+    &::before {
+      position: absolute;
+      top: $c-price__strike-top-pos;
+      right: $c-price__strike-right-pos;
+      width: 100%;
+      content: "";
+      border-bottom: $c-price__strike-border-width solid $c-price__strike-color-light;
+      transform: rotate($c-price__strike-rotation);
+    }
+  }
+}
+
+// Smaller variation, i.e. for monthly price
+.c-price-secondary .c-price__value,
+.c-price-secondary .c-price__period {
+  font-weight: $font-weight-normal;
+}
+
+.c-price-muted {
+  color: $text-muted;
+}
+
+@mixin c-price--small {
+  .c-price__value,
+  .c-price__period { font-size: $c-price__value-font-size--small; }
+
+  .c-price__currency,
+  .c-price__cents { font-size: $c-price__value-font-size--small * $c-price__superscript-size-ratio; }
+
+  &.c-price--strike::before {
+    border-bottom-width: $c-price__strike-border-width--small;
+  }
+}
+
+.c-price--small {
+  @include c-price--small();
+}
+
+.c-price--small-sm {
+  @include media-breakpoint-down(sm) {
+    @include c-price--small();
+  }
+}
+
+.c-price--mini {
+  .c-price__value { font-size: $c-price__value-font-size--mini; }
+
+  .c-price__currency,
+  .c-price__cents {
+    font-size: $c-price__value-font-size--mini * $c-price__superscript-size-ratio;
+  }
+
+  .c-price__cents {
+    margin-left: - 0.12rem;
+  }
+
+  &.c-price--strike::before {
+    border-bottom-width: $c-price__strike-border-width--mini;
+  }
+}

@@ -1,0 +1,59 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 08.06.18 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// A card-like wrapper around a group content that features the signature
+// Brinks Home frame border.
+// -----------------------------------------------------------------------------
+
+$c-frame-hover-border-outset-x: $spacer * 2;
+$c-frame-hover-border-outset-y: $spacer;
+
+.c-frame-hover {
+  // Avoid link-styling when frame is clickable
+  @extend %u-link--unstyled;
+  padding: $c-frame-hover-border-outset-y $c-frame-hover-border-outset-x;
+  cursor: pointer;
+
+  &::before {
+    position: absolute;
+    top: -$c-frame-hover-border-outset-y;
+    right: 0;
+    bottom: -$c-frame-hover-border-outset-y;
+    left: 0;
+    content: "";
+    border: $bhs-frame-width solid transparent;
+    transition: border 0.2s ease-in-out;
+  }
+
+  @include hover() {
+    &::before { border-color: $white; }
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-top: $c-frame-hover-border-outset-y * 2;
+    padding-bottom: $c-frame-hover-border-outset-y * 2;
+
+    &:first-of-type {
+      padding-right: $c-frame-hover-border-outset-x + $bhs-frame-width;
+      padding-left: $spacer;
+
+      &::before {
+        left: -$c-frame-hover-border-outset-x;
+      }
+    }
+
+    &:last-of-type {
+      padding-right: $spacer;
+      padding-left: $c-frame-hover-border-outset-x + $bhs-frame-width;
+
+      &::before {
+        right: -$c-frame-hover-border-outset-x;
+      }
+    }
+  }
+}
+

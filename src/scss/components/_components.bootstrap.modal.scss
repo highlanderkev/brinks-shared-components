@@ -1,0 +1,54 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 09.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap's Modal Component
+// See: http://getbootstrap.com/docs/4.1/components/modal/
+// -----------------------------------------------------------------------------
+
+// Extensions/Overrides
+// -----------------------------------------------------------------------------
+
+// Make modal header vertical padding less pronounced on mobile
+.modal-header,
+.modal-footer {
+  @include media-breakpoint-down(sm) {
+    padding: $spacer;
+  }
+}
+
+//Modals should now have `$brinks-blue` frame around the edge.
+.modal-content {
+  border: 15px solid $brinks-blue;
+}
+
+
+.modal-body {
+  @include media-breakpoint-down(sm) {
+    padding-right: $spacer;
+    padding-left: $spacer;
+  }
+}
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+.modal-stretch--sm-down {
+  @include media-breakpoint-down(sm) {
+    padding-top: $modal-dialog-margin;
+    padding-bottom: $modal-dialog-margin;
+
+    .modal-dialog {
+      height: 100%;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    .modal-content {
+      min-height: 100%;
+    }
+  }
+}

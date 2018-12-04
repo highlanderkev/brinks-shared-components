@@ -1,0 +1,18 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.31.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Alerts Component
+// See: http://getbootstrap.com/docs/4.1/components/alerts/
+// -----------------------------------------------------------------------------
+
+// Overrides / Extensions
+// -----------------------------------------------------------------------------
+
+.alert {
+  margin-bottom: $spacer-4;
+  font-weight: bold;
+}

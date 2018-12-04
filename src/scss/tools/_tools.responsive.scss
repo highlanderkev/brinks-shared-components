@@ -1,0 +1,24 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 07.01.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Mixins and functions to aid with responsive styles
+// -----------------------------------------------------------------------------
+
+
+// Stores the current breakpoint key (i.e. "sm") in a hidden pseudo-element
+// so we can access it via JS
+@mixin breakpoint-tracker() {
+  html::after {
+    display: none;
+
+    @each $breakpoint in map-keys($grid-breakpoints) {
+      @include media-breakpoint-only($breakpoint) {
+        content: "#{$breakpoint}";
+      }
+    }
+  }
+}

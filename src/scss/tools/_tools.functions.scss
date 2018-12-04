@@ -1,0 +1,40 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.10.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Useful SASS functions.
+// -> Use `_` prefix for local variable and parameter names in mixins/functions.
+// -----------------------------------------------------------------------------
+
+@function is-even($value) {
+  @return $value % 2 == 0;
+}
+
+// Rounds to nearest even number
+
+@function round-even($value) {
+  $rounded-value: ceil($value);
+
+  @if (is-even($rounded-value)) {
+    @return $rounded-value;
+  } @else {
+    @return $rounded-value + 1;
+  }
+}
+
+// Return px value of a given REM value
+
+@function rem-to-px($rem-value) {
+  @return (($rem-value * $pixel-base) / 1rem) * 1px;
+}
+
+// Converts REM to px and rounds to the nearest even px.
+// -> This is valuable for rules that dont behave well with
+//    odd pixel values (i.e line-height).
+
+@function rem-to-even-px($rem-value) {
+  @return round-even(rem-to-px($rem-value));
+}

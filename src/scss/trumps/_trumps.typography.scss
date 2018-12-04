@@ -1,0 +1,17 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// -----------------------------------------------------------------------------
+// Hacks for type-related classes and elements
+// -----------------------------------------------------------------------------
+
+// Looking for cleaner way to do this - maybe doesnt exist.
+// tel <a> tags should not have the standard orange link color other links do,
+// but should inherit the color of their parent. Use util classes to override this.
+[href^=tel] {
+  color: inherit;
+
+  @include hover-focus {
+    color: inherit !important;
+  }
+}

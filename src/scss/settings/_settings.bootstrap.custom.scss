@@ -1,0 +1,422 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// These variables represent LiveWatch's custom SASS variable settings for Bootstrap 4,
+// implemented according to the pattern described here:
+// http://v4-alpha.getbootstrap.com/getting-started/options/#customizing-variables
+//
+// -> Unless noted as `CUSTOM`, each variable is an override of a Bootstrap-defined
+//    variable from boostrap/scss/_variables.scss.
+// -> Some vars are copied unchanged from BS, as they are needed in this file to
+//    calculate other vars.
+// -----------------------------------------------------------------------------
+
+// First, some custom vars and helpers
+
+// Default px size for 1rem (root font size)
+$pixel-base: 18;
+$rem-base: $pixel-base * 1px;
+
+// Returns the rem value for a given pixel value
+// @param {string, int} $value – pixel value with or without unit
+//                               (i.e. 1, 1px are both valid)
+@function px-to-rem($value) {
+  $px-value: $value / ($value * 0 + 1); // strip unit if exist
+  $rem-value: ($px-value / $pixel-base) * 1rem;
+  @return $rem-value;
+}
+
+// Ratio used for various sizing calculations
+$golden-ratio: 1.618;
+
+// END CUSTOM
+
+// BOOTSTRAP VARIABLE OVERRIDES
+
+// Color System
+//
+
+// CUSTOM Color additions
+$brinks-blue:               #0033a0;
+$brinks-blue-trans:         rgba(0, 51, 160, 0.85);
+$brinks-teal:               #62e0c9;
+
+$brinks-yellow:             #ffc43d;
+$brinks-light-gray:         #f4f6f7;
+$brinks-deep-blue:          #151f55;
+$brinks-slate:              #637581;
+
+$black-trans:               rgba(0, 0, 0, 0.35);
+$black-trans-dark:          rgba(0, 0, 0, 0.5);
+$white-muted:               rgba(255, 255, 255, 0.73);
+$white-muted-darker:        rgba(255, 255, 255, 0.9);
+// END CUSTOM
+
+$white:    #fff;
+$black:    #000;
+$gray-100: $brinks-light-gray;
+$gray-200: #eceeef;
+$gray-600: $brinks-slate;
+$gray-700: #55595c;
+$gray-800: #364d59;
+
+$red:      #e61e2e;
+
+$primary:   $brinks-blue;
+$secondary: $brinks-slate;
+$success:   $brinks-teal;
+$info:      $brinks-light-gray;
+$warning:   $brinks-yellow;
+$danger:    $red;
+$light:     $brinks-light-gray;
+$dark:      $brinks-deep-blue;
+
+$theme-colors: ();
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+    "primary":    $primary,
+    "secondary":  $secondary,
+    "success":    $success,
+    "info":       $info,
+    "warning":    $warning,
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
+  ),
+  $theme-colors
+);
+
+$theme-color-interval:      8%;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark:             theme-color("primary");
+
+$border-color:              theme-color("light"); // Custom addition
+$border-color-inverse:      rgba(255,255,255,0.35); // Custom addition
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-rounded:            false;
+
+// Spacing
+$spacer: 1rem;
+
+// Add custom value to spacers
+$spacers: map-merge(
+  (
+    6: ($spacer * 5)
+  ),
+  $spacers
+);
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$inverse-bg:    theme-color("dark");
+
+// Paragraphs
+//
+// Style p element.
+
+$paragraph-margin-bottom: $spacer * 1.5;
+
+// Body
+//
+// Settings for the `<body>` element.
+$body-color:  theme-color("dark");
+
+// Links
+//
+// Style anchor elements.
+
+$link-color: theme-color("primary");
+$link-hover-color:      darken($link-color, 7%);
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm: 576px,
+  md: 940px,
+  lg: 1140px,
+  xl: 1140px
+);
+
+
+// Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-gutter-width: $spacer * 2;
+
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+
+$line-height-sm: $golden-ratio;
+
+$border-width:         1rem;
+$border-color:         theme-color("light");
+$border-color-inverse: rgba(255,255,255,0.35); // Custom addition
+
+$border-radius:        0.18rem;
+$border-radius-lg:       .3rem;
+$border-radius-sm:     0.18rem;
+
+$component-active-bg:           theme-color("primary");
+$component-active-border-color: rgba(theme-color("primary"), 0.5); // CUSTOM addition
+
+
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+
+$font-family-base: "Avenir W01", Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+$font-size-base: 1rem; // 17px with our current default
+$font-size-lg:   1.178rem;
+
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold:   900;
+$font-weight-extra-bold: 900;
+
+$font-weight-base: $font-weight-normal;
+
+$line-height-base: $golden-ratio;
+
+
+$h1-font-size: 2.112rem; // 38px
+$h2-font-size: 1.111rem; // 20px - weird, i know. H2 is all caps tho, so appears larger
+$h3-font-size: 1.412rem; // 24px
+$h4-font-size: 1rem; // 18px
+$h5-font-size: 1rem; // 18px
+$h6-font-size: 1rem; // 18px
+
+$headings-margin-bottom: $spacer;
+$headings-font-family:   inherit;
+$headings-font-weight:   900;
+$headings-line-height:   1.33;
+$headings-color:         theme-color("primary");
+
+$display1-weight:  $font-weight-medium;
+$display2-weight:  $font-weight-medium;
+$display3-weight:  $font-weight-medium;
+$display4-weight:  $font-weight-medium;
+
+$lead-font-size:   px-to-rem(21);
+$lead-font-weight: 400;
+
+$small-font-size:  0.833rem; // 15px
+
+$hr-border-color: $white;
+
+
+// Tables
+
+$table-cell-padding:            $spacer;
+$table-cell-padding-sm:         $spacer / 2;
+
+$table-accent-bg:               theme-color("info");
+
+$table-inverse-bg:              theme-color("dark");
+$table-inverse-color:           $white;
+
+$table-head-color:              $gray-600;
+
+
+// Buttons
+
+$input-btn-padding-y:            px-to-rem(5);
+$input-btn-padding-x:            1rem;
+$btn-font-weight:                $font-weight-bold;
+$btn-focus-box-shadow:           none;
+$btn-width-lg:                   px-to-rem(189);
+$btn-padding-y:                  px-to-rem(5.5);
+$btn-padding-x:                  px-to-rem(15);
+$btn-padding-x-lg:               px-to-rem(43);
+$btn-active-box-shadow:          inset 0 3px 5px rgba(0, 0, 0, 0.125);
+$btn-box-shadow:                 inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
+$btn-secondary-color:            $gray-200;
+$btn-secondary-border:           $border-color;
+$btn-border-width:               px-to-rem(5);
+$btn-block-spacing-y:            10px;
+
+//Carousel
+$carousel-control-color:           $primary;
+$carousel-control-icon-width:      30px;
+$carousel-control-icon-height:     40px;
+
+$carousel-indicator-width:         12px;
+$carousel-indicator-height:        12px;
+$carousel-indicator-spacer:         3px;
+$carousel-indicator-active-bg:     $primary;
+
+$carousel-control-prev-icon-bg:    str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"), "#", "%23");
+$carousel-control-next-icon-bg:    str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$carousel-control-color}' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E"), "#", "%23");
+$carousel-control-opacity:         solid;
+
+// Close
+
+$close-font-size:                   $font-size-base * 1.6;
+
+// Forms
+
+$input-border-width       : 2px;
+$input-box-shadow         : none;
+$input-focus-box-shadow   : none;
+$input-focus-border-color : $component-active-border-color;
+
+$input-group-addon-color        : $gray-600;
+$input-group-addon-bg           : $input-bg;
+$input-group-addon-border-color : $input-border-color;
+
+$custom-control-indicator-size:           1.06rem;
+
+$custom-control-gutter:                   $custom-control-indicator-size + $spacer;
+$custom-control-spacer-y:                 $spacer / 2;
+
+$custom-control-indicator-bg-size:        55% 55%;
+
+$custom-control-indicator-checked-color:  theme-color("success");
+$custom-control-indicator-checked-bg:     theme-color("primary");
+$custom-control-checked-indicator-bg:     theme-color("primary");
+$custom-control-indicator-active-bg:      theme-color("primary");
+
+$custom-checkbox-indicator-icon-checked:  str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$custom-control-indicator-checked-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"), "#", "%23");
+$custom-radio-indicator-icon-checked:     str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='#{$custom-control-indicator-checked-color}'/%3E%3C/svg%3E"), "#", "%23");
+
+$custom-control-indicator-focus-box-shadow: none;
+
+$custom-control-indicator-active-bg: $component-active-border-color;
+
+$custom-checkbox-indicator-indeterminate-bg: theme-color("primary");
+
+$custom-select-padding-y:          $input-btn-padding-y;
+$custom-select-bg:                 $input-bg;
+
+$custom-select-focus-border-color: theme-color("primary");
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+
+$dropdown-padding-y:             $spacer * 0.85;
+$dropdown-border-color:          $border-color;
+
+$dropdown-link-color:            $link-color;
+$dropdown-link-hover-color:      darken($link-color, 5%);
+
+$dropdown-item-padding-x:        1.3rem;
+
+// Z-index master list
+
+$zindex-background-overlay-screen:   970; // CUSTOM addition
+$zindex-background-overlay-content:  980; // CUSTOM addition
+
+
+// Navbar
+
+$navbar-padding-x:                  $spacer;
+$navbar-padding-y:                  $spacer;
+
+$navbar-brand-padding-y:            0;
+
+$navbar-toggler-padding-x:          $spacer;
+
+$navbar-dark-color:              $white;
+$navbar-dark-hover-color:        $white-muted-darker;
+$navbar-dark-toggler-icon-bg:         none;
+$navbar-dark-toggler-border-color:     transparent;
+
+$navbar-light-color:                $gray-600;
+$navbar-light-hover-color:          $gray-700;
+$navbar-light-active-color:         theme-color("dark");
+$navbar-light-toggler-bg:           none;
+$navbar-light-toggler-border:       transparent;
+
+
+// Navs
+
+$nav-item-margin:                   0;
+$nav-pills-active-link-bg:          theme-color("dark");
+
+
+// Jumbotron
+
+$jumbotron-padding:              $spacer * 2;
+$jumbotron-bg:                   $gray-100;
+
+
+// Cards
+
+$card-spacer-x:                  $spacer * 2;
+$card-spacer-y:                  $spacer;
+$card-border-radius:             $border-radius-lg;
+$card-border-color:              $border-color;
+$card-cap-bg:                    theme-color("info");
+
+$card-deck-margin:               $spacer;
+
+
+// Tooltips
+
+$tooltip-max-width:              14rem;
+$tooltip-bg:                     darken($gray-800, 3%);
+$tooltip-opacity:                0.95;
+$tooltip-padding-y:              0.7rem;
+$tooltip-padding-x:              0.7rem;
+
+$tooltip-arrow-width:            8px;
+$tooltip-arrow-color:            darken($gray-800, 3%);
+
+// badges
+
+$badge-padding-x:             0.6em;
+$badge-padding-y:             0.5em;
+
+$badge-pill-padding-x:        0.7em;
+
+// Modals
+
+// Padding applied to the modal body
+$modal-inner-padding:         $spacer * 1.5;
+
+$modal-dialog-margin:         0;
+
+$modal-title-line-height:     $headings-line-height;
+
+$modal-header-padding:        $spacer * 1.5;
+
+$modal-lg:                    850px;
+$modal-md:                    600px;
+
+
+// Alerts
+
+$alert-padding-x:            $spacer * 1.5;
+$alert-padding-y:            $spacer * 1.5;
+
+
+// Progress bars
+
+$progress-height:            $spacer;
+$progress-border-radius:     $spacer / 2; // pill-style border
+
+// List group
+
+$list-group-bg:              transparent;
+$list-group-border-color:    $border-color;
+
+$list-group-item-padding-x:  $spacer * 1.5;
+$list-group-item-padding-y:  $spacer;

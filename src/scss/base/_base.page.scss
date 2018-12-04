@@ -1,0 +1,31 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.13.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Base styles for page-level elements - <html>, <body>
+// -----------------------------------------------------------------------------
+
+html {
+  height: 100%;
+  font-size: $rem-base;
+}
+
+body {
+  min-height: 100%;
+  // Make typography smooth and consistent across browsers
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// This is needed for reponsive JS. It generates a hidden pseudo-element whose
+// 'content:' attribute stores the current breakpoint (i.e. 'sm', 'xl')
+@include breakpoint-tracker();
+
+// Development-only
+// -> Uncomment to see a legend with the current BS breakpoint in the corner of
+//    the screen.
+// -> TODO: come up with a better way to toggle dev-only SASS.
+// @include show-bootstrap-viewports();

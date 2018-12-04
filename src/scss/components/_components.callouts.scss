@@ -1,0 +1,93 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 11.28.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Callouts are small textual components that are used to highlight a particular
+// element to the user - i.e. "new" on a product image, or "most popular" on a
+// monthly plan.
+// -----------------------------------------------------------------------------
+
+$c-callout-ribbon-outset: 4px;
+$c-callout-ribbon-side-length: 75px;
+$c-callout-ribbon-long-side-length: 100px;
+$c-callout-ribbon-hypotenuse: 106px; // TODO: calc this using SASS math
+$c-callout-ribbon-long-hypotenuse: 141px; // TODO: calc this using SASS math
+$c-callout-ribbon-corner-padding: 17px;
+$c-callout-ribbon-long-corner-padding: 30px;
+
+.c-callout-ribbon {
+  position: absolute;
+  top: -($c-callout-ribbon-outset);
+  right: -($c-callout-ribbon-outset);
+  width: $c-callout-ribbon-side-length;
+  height: $c-callout-ribbon-side-length;
+  overflow: hidden;
+
+  &__text {
+    display: block;
+    min-width: $c-callout-ribbon-hypotenuse - (2 * $c-callout-ribbon-outset);
+    margin-top: $c-callout-ribbon-corner-padding;
+    margin-left: -1px; // TODO: determine formula for this
+    @extend %u-text--caps;
+    font-size: $badge-font-size;
+    color: $white;
+    text-align: center;
+    background-color: theme-color("primary");
+    box-shadow: 0 0 3px $black-trans;
+    transform: rotate(45deg);
+  }
+
+  &__text::before,
+  &__text::after {
+    position: absolute;
+    top: 100%;
+    content: "";
+    border-top: 3px solid theme-color("primary");
+    border-bottom: 3px solid transparent;
+  }
+
+  &__text::before {
+    left: 0;
+    border-right: 3px solid transparent;
+    border-left: 3px solid theme-color("primary");
+  }
+
+  &__text::after {
+    right: 0;
+    border-right: 3px solid theme-color("primary");
+    border-left: 3px solid transparent;
+  }
+}
+
+// Generate variants
+
+@mixin callout-ribbon-color-variant($_bg-color) {
+  .c-callout-ribbon__text {
+    background-color: $_bg-color;
+
+    &::before,
+    &::after {
+      border-top-color: $_bg-color;
+    }
+
+    &::before { border-left-color: $_bg-color; }
+    &::after { border-right-color: $_bg-color; }
+  }
+}
+
+.c-callout-ribbon--primary { @include callout-ribbon-color-variant(theme-color("primary")); }
+.c-callout-ribbon--success { @include callout-ribbon-color-variant(theme-color("success")); }
+
+.c-callout-ribbon--long {
+  width: $c-callout-ribbon-long-side-length;
+  height: $c-callout-ribbon-long-side-length;
+
+  .c-callout-ribbon__text {
+    min-width: $c-callout-ribbon-long-hypotenuse - (2 * $c-callout-ribbon-outset);
+    margin-top: $c-callout-ribbon-long-corner-padding;
+    margin-left: -6px; // TODO: determine formula for this
+  }
+}

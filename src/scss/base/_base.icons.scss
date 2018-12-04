@@ -1,0 +1,28 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 06.10.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Base styles for iconography
+// -----------------------------------------------------------------------------
+
+$icon-spacing-x: 0.15em;
+
+[class^="icon-"], [class*=" icon-"] {
+  // Give icons text-like wordspacing.
+  margin-right: $icon-spacing-x;
+  margin-left: $icon-spacing-x;
+  vertical-align: inherit;
+
+  // No outer wordspacing when icon is first/last child
+  &:first-child { margin-left: 0; }
+  &:last-child { margin-right: 0; }
+
+  // No wordspacing at all when icon is only child
+  &:only-child {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

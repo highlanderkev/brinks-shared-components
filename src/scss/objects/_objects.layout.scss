@@ -1,0 +1,45 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.11.16
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+//  This file sets cosmetic styles for layout blocks
+// -> This are the **outermost** components (beneath <body>) of ANY page
+// -> These classes must be assigned only ONCE per page
+// -----------------------------------------------------------------------------
+
+// Two-column layout with sidebar
+// Content | Sidebar, or Sidebar | Content
+$o-layout-with-sidebar-column-ratio: (
+	// Extra small screen, Phones
+	xs: 12 12,
+	// Large screen, Desktops
+	lg: 9 3,
+	// Extra large screen, wide Desktops
+	xl: 9 3
+);
+
+.o-layout-content {
+  padding-top: $block-spacer-mid-sm-down;
+  padding-bottom: $block-spacer-mid-sm-down;
+
+  @include media-breakpoint-up(md) {
+    padding-top: $block-spacer-lil-md-up;
+    padding-bottom: $block-spacer-lil-md-up;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-top: $block-spacer-mid-md-up;
+    padding-bottom: $block-spacer-mid-md-up;
+  }
+
+  @include make-reponsive-columns($o-layout-with-sidebar-column-ratio, __main __sidebar, false);
+}
+
+//We don't need padding on the top and the bottom of footer section
+.o-layout-footer {
+  //padding-top: $block-spacer-big-sm-down;
+  //padding-bottom: $block-spacer-big-sm-down;
+}

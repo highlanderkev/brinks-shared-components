@@ -1,0 +1,142 @@
+// =============================================================================
+//          (c) Copyright 2018 by LiveWatch Security LLC | Evanston, IL, USA
+// =============================================================================
+// Created at: 04.10.18 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap's Dropdown Component
+// See:  http://v4-alpha.getbootstrap.com/components/dropdowns/
+// -----------------------------------------------------------------------------
+
+$dropdown-item-padding-y: $spacer / 2;
+
+$navbar-underline-dropdown-item-line-width: 0.22rem;
+$navbar-trans-dropdown-arrow-width: 9px;
+$navbar-trans-dropdown-bg-color: $brinks-blue-trans;
+
+
+// Overrides / Extensions
+// -----------------------------------------------------------------------------
+
+.dropdown-item {
+  padding-top: $dropdown-item-padding-y;
+  padding-bottom: $dropdown-item-padding-y;
+}
+
+.dropdown-toggle:not([href]) {
+  cursor: default;
+}
+
+.chevron::before {
+  border-style: solid;
+  border-width: 0.15em 0.15em 0 0;
+  content: "";
+  display: inline-block;
+  height: 0.45em;
+  color: $white;
+  left: 0.15em;
+  position: relative;
+  top: 0.15em;
+  transform: rotate(-45deg);
+  width: 0.45em;
+}
+
+.chevron.bottom::before {
+  top: -2px;
+  transform: rotate(135deg);
+}
+
+
+
+.navbar-nav .dropdown-menu {
+  left: - $dropdown-item-padding-x;
+  margin-top: 0;
+  border-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: $box-shadow-fixed-header;
+}
+
+.navbar-nav .dropdown-item {
+  font-size: $small-font-size;
+  font-weight: $font-weight-extra-bold;
+  text-transform: none;
+}
+
+// Style overrides for when dropdown is within the toggleable navbar
+.navbar-collapse.show .dropdown-menu {
+  padding-top: $dropdown-padding-y;
+  padding-bottom: 0;
+  margin-top: -6px;
+  border: 0;
+  box-shadow: none;
+}
+
+// Style overrides for when dropdown is NOT within the toggleable navbar
+.navbar-collapse:not(.show) .dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+// Bootstrap does not provide sass var settings for inverse navbar.
+// Need to do manually.
+.navbar-dark .dropdown-menu {
+  background-color: $navbar-dark-bg-color;
+}
+
+.navbar-dark .dropdown-item {
+  color: $navbar-dark-color;
+
+  @include hover-focus {
+    color: $navbar-dark-hover-color;
+    background-color: transparent;
+  }
+}
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+.navbar-trans .navbar-nav .dropdown-menu {
+  padding-top: $dropdown-padding-y;
+  background-color: $navbar-trans-dropdown-bg-color;
+  border-top: 1px;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+
+  &::after {
+    position: absolute;
+    top: - $navbar-trans-dropdown-arrow-width * 2;
+    left: 50%;
+    margin-left: -$navbar-trans-dropdown-arrow-width;
+    pointer-events: none;
+    content: "";
+    border: $navbar-trans-dropdown-arrow-width solid transparent;
+    border-bottom-color: $navbar-trans-dropdown-bg-color;
+  }
+}
+
+.nav-underlined .nav-item.dropdown .nav-link {
+  @include hover-focus {
+    background-color: transparent;
+  }
+}
+
+.nav-underlined .dropdown-item {
+  padding-left: $dropdown-item-padding-x - $navbar-underline-dropdown-item-line-width;
+  line-height: $line-height-base;
+  border-left: $navbar-underline-dropdown-item-line-width solid transparent;
+
+  // Adds white link to left of link on hover
+  @include hover-focus {
+    border-left-color: $dropdown-link-active-color;
+
+    .navbar-dark & {
+      border-left-color: theme-color("warning");
+    }
+  }
+
+  // Do not apply highlight line in stacke nav context
+  .navbar-collapse.show &,
+  .navbar-collapse.collapsing & {
+    border-left-color: transparent;
+  }
+}

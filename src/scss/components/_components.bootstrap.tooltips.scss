@@ -1,0 +1,25 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Created at: 06.15.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Tooltips Component
+// See: http://getbootstrap.com/docs/4.1/components/tooltips/
+// -----------------------------------------------------------------------------
+
+// Make text tighter and bold to make more readable. Sadly no settings for these
+// in variables.
+.tooltip {
+  font-weight: $font-weight-bold;
+  line-height: $line-height--compact;
+}
+
+.tooltip-inner {
+  text-align: left;
+}
+
+// Make tooltip-triggering area more apparent with pointer cursor
+[data-toggle="tooltip"] { cursor: pointer; }
+
+

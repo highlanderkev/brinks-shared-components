@@ -1,0 +1,26 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 12.28.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap badge Components
+// See: http://getbootstrap.com/docs/4.1/components/badge/
+// -----------------------------------------------------------------------------
+
+$badge-circle-diameter: 1.65em;
+$badge-circle-padding-y: 0.36em;
+
+// badge Circle
+//
+// `badge-circle` - A circular version of the [Bootstrap badge](http://v4-alpha.getbootstrap.com/components/badge/).
+// At this time, only supports up to 2 characters.
+//
+// Styleguide typography/badge
+.badge-circle {
+  width: $badge-circle-diameter;
+  height: $badge-circle-diameter;
+  padding: $badge-circle-padding-y 0;
+  border-radius: 50%;
+}

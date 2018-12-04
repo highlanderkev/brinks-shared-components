@@ -1,0 +1,98 @@
+// =============================================================================
+//          (c) Copyright 2018 by Brinks Home Security | Evanston, IL, USA
+// =============================================================================
+// Version   : 0.1.1
+// Created at: 05.16.16 by Wes Dearborn
+// Project   : Brinks Home Security Shared Assets
+// -----------------------------------------------------------------------------
+// Extensions and overrides to Bootstrap Card Component
+// See: http://getbootstrap.com/docs/4.1/components/card/
+// -----------------------------------------------------------------------------
+
+$card-img--thumb-max-height: 7.5rem;
+$card--clickable-hover-box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.15);
+$card--clickable-hover-border-color: rgba(0, 0, 0, 0.22);
+$card--clickable-active-border-color: theme-color("primary");
+
+// Overrides / Extensions
+// -----------------------------------------------------------------------------
+
+// Ensure vertical spacing btw cards in a card deck is equal to horizonal.
+.card,
+.card-deck .card { margin-bottom: $card-spacer-y * 2; }
+
+.card-group .card {
+  margin-bottom: 0;
+
+  // cards in a card-group have a  "latched" together appearance
+  // on larger screens, but stacked cards (i.e on mobile) dont have this
+  // visual behaviour (yet). This adds it.
+  // *Note* - could become default functionality in BS4, so keep an eye out
+  @include media-breakpoint-down(sm) {
+    + .card { border-top: 0; }
+    &:first-child { @include border-bottom-radius(0); }
+    &:last-child { @include border-top-radius(0); }
+    &:not(:first-child):not(:last-child) { border-radius: 0; }
+  }
+}
+
+// *Possible BS4 alpha fix* - `.card-text` is yet to be styled; add standard
+// card margin-y here so fits with vertical rhythm of card.
+.card-text {
+  margin-bottom: $card-spacer-y;
+
+  // Reset bottom margin on final text block in card
+  &:last-child { margin-bottom: 0; }
+}
+
+.card-body {
+  // Reponsive sizing for card block padding - default feels too big on mobile
+  @include media-breakpoint-down(sm) {
+    padding: $block-spacer-mid-sm-down;
+  }
+}
+
+// Custom blocks, elements, modifiers (BEM)
+// -----------------------------------------------------------------------------
+
+.card--clickable {
+  @extend %u-link--unstyled;
+  cursor: pointer;
+
+  @include hover {
+    border-color: $card--clickable-hover-border-color;
+    box-shadow: $card--clickable-hover-box-shadow;
+  }
+
+  &.active {
+    border-color: $card--clickable-active-border-color;
+    box-shadow: none;
+  }
+}
+
+.card-img--thumb {
+  max-height: $card-img--thumb-max-height;
+  margin-bottom: $spacer-4;
+}
+
+// Use to place blocks of content at the bottom of the card. Great for card
+// actions - i.e. links, buttons, etc.
+.card-body--bottom {
+  flex: 0 1 auto;
+  margin-top: auto; // Pushes element to bottom of flex container
+
+  // negate top-padding when preceeded by card-body. Keeps padding
+  // from doubling up.
+  .card-body + & {
+    padding-top: 0;
+  }
+}
+
+.card-deck--gridded {
+  @include make-row();
+
+  .card {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
