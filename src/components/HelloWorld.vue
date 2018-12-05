@@ -1,7 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <BrinksButton :text="msg" v-bind:onClick="click"/>
+    <BrinksIconButton/>
+    <BrinksButton :type="buttonType" :text="msg" v-bind:onClick="click"/>
+    <BrinksIcon name="check" class="h2 align-top" />
+    <BrinksList :type="listType" :items="listItems" />
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -33,16 +36,39 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import BrinksButton from './Button.vue';
+import { Component, Prop, Provide, Vue } from 'vue-property-decorator';
+import { default as BrinksButton, ButtonType } from './Button.vue';
+import { default as BrinksList, IListItem, ListType } from './List.vue';
+import BrinksIcon from './Icon.vue';
+import BrinksIconButton from './IconButton.vue';
 
 @Component({
   components: {
     BrinksButton,
+    BrinksIcon,
+    BrinksIconButton,
+    BrinksList,
   },
 })
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
+
+  @Provide('baseUrl') private baseUrl = '//d1cng9tcgpnm0q.cloudfront.net/icons/symbol-defs.svg#icon';
+
+  private buttonType: ButtonType[] = ['btn-primary', 'btn-lg'];
+
+  private listType: ListType = 'list-ordered';
+
+  private listItems: IListItem[] = [
+    {
+      id: 1,
+      data: 'test',
+    },
+    {
+      id: 2,
+      data: 'test 2',
+    },
+  ];
 
   public click() {
     alert('click!');

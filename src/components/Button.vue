@@ -1,23 +1,38 @@
 <template>
-    <button type="button" class="btn btn-primary" @click="onClick()">
-        {{text}}
+    <button type="button" :class="classes" @click="onClick()" :disabled="disabled">
+        <slot name="icon-left"></slot>
+        <span>{{text}}</span>
+        <slot name="icon-right"></slot>
     </button>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { noop } from 'vue-class-component/lib/util';
+import { Component, Prop, Emit, Vue } from 'vue-property-decorator';
+
+/**
+ * @typedef ButtonType - literal string type for easy enumerating all available button types.
+ */
+export type ButtonType = 'btn-primary' | 'btn-link' | 'btn-success' | 'btn-lg' | 'btn-warning';
 
 /**
  * Basic Button Component
  * @export
  * @class Button
+ * @classdesc Brinks Vue Button Component.
  * @extends {Vue}
  */
 @Component({})
 export default class BrinksButton extends Vue {
+    @Prop({ default: 'btn-primary' }) public type!: ButtonType | ButtonType[];
     @Prop() public text!: string;
-    @Prop() public onClick!: () => void;
+    @Prop({ default: Function }) public onClick!: () => void;
+    @Prop({ default: false }) public disabled!: boolean;
+
+    private readonly defaultClass = 'btn';
+
+    private get classes() {
+        return `${this.defaultClass} ${this.type.toString().replace(',', ' ')}`;
+    }
 }
 </script>
 
