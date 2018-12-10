@@ -1,9 +1,9 @@
 <template>
   <div style="margin-bottom: 10px;">
-    <BrinksButton text="Icon Button">
+    <BrinksButton text="Icon Button Left">
         <BrinksIcon name="check" slot="icon-left" :btnIcon="btnIcon"/>
     </BrinksButton>
-    <BrinksButton text="Icon Button">
+    <BrinksButton text="Icon Button Right">
         <BrinksIcon name="check" slot="icon-right" :btnIcon="btnIcon" class="btn__icon--right"/>
     </BrinksButton>
   </div>
