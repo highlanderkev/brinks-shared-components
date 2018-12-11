@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Prop, Inject, Provide, Vue } from 'vue-property-decorator';
-import { default as BrinksButton, ButtonType } from './Button.vue';
+import { default as BrinksButton, ButtonType } from '../components/Button.vue';
 import BrinksIcon from './Icon.vue';
 
 @Component({
