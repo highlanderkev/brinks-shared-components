@@ -37,10 +37,10 @@
 
 <script lang="ts">
 import { Component, Prop, Provide, Vue } from 'vue-property-decorator';
-import { default as BrinksButton, ButtonType } from './Button.vue';
-import { default as BrinksList, IListItem, ListType } from './List.vue';
-import BrinksIcon from './Icon.vue';
-import BrinksIconButton from './IconButton.vue';
+import { default as BrinksButton, ButtonType } from '../components/Button.vue';
+import { default as BrinksList, IListItem, ListType } from '../components/List.vue';
+import BrinksIcon from '../components/Icon.vue';
+import BrinksIconButton from '../components/IconButton.vue';
 
 @Component({
   components: {
